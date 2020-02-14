@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="工作中常用Git命令总结">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>工作中常用Git命令总结 - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            工作中常用Git命令总结
+            
+          </h1>
+          <p class="posted-on">
+            
+                2019-06-14
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h2 id="提交远程仓库流程"><a href="#提交远程仓库流程" class="headerlink" title="提交远程仓库流程"></a>提交远程仓库流程</h2><p>1.将本地修改文件提交到缓存区</p>
+<pre><code>git add .
+</code></pre><p>2.将缓存区文件提交到当前分支并添加备注</p>
+<pre><code>git commit -m &quot;remarks&quot;
+</code></pre><p>3.拉取远程仓库代码(⚠️多人协作下必备操作)</p>
+<pre><code>git pull origin &lt;branchName&gt;
+</code></pre><p>4.如果存在冲突，则解决冲突后，若需要新的结点，则使用2提交；否则使用以下命令修改当前提交</p>
+<pre><code>git commit --amend
+</code></pre><p>5.将本地commit提交远程仓库</p>
+<pre><code>git push origin &lt;branchName&gt;
+</code></pre><h2 id="项目测试"><a href="#项目测试" class="headerlink" title="项目测试"></a>项目测试</h2><p>1.将代码提到staging环境部署的分支(通常是dev)</p>
+<pre><code>git cherry-pick &lt;versionNo&gt;
+</code></pre><p>⚠️使用cherry-pick是因为dev分支存在各个同事同时在开发的提交，很可能是下次上线不上的或者开发不完全的，为了避免每次merge都会有一大堆问题，直接使用cherry-pick简单粗暴。</p>
+<p>2.代码开发完成，需要提测给测试同学(部署test分支)<br>【<em>代码合并参考<strong>项目上线</strong>第3点</em>】</p>
+<h2 id="项目上线"><a href="#项目上线" class="headerlink" title="项目上线"></a>项目上线</h2><p>1.合并多个commit</p>
+<pre><code>git rebase -i &lt;versionNo&gt;
+</code></pre><p>a)将需要合并的commit版本号前的pick改为s(第一个pick需保留)<br>b)若存在冲突，则修改冲突后，提交修改</p>
+<pre><code>git add .
+</code></pre><p>继续后续合并</p>
+<pre><code>git rebase --continue
+</code></pre><p>c)若没有冲突或冲突已经解决，则会将所有commit的备注依次列出，保留一个备注后，依次按<code>Esc</code> =&gt; <code>:wq</code>(:表示输入命令，w表示保存，q表示退出)</p>
+<p>d)放弃合并</p>
+<pre><code>git rebase --abort
+</code></pre><p>2.代码review</p>
+<p>3.代码合并</p>
+<p>a)若是远程仓库合并，则可以提交一个Merge Request。仓库系统会自动diff两个分支的代码改动地方，若是没有冲突则可以点击<code>merge</code>按钮自动合并。若是有冲突，则本地修改冲突再提交修改后的代码到仓库。</p>
+<p>b)若是本地合并</p>
+<p>b.1)拉取远程分支到本地(分支为开发后需要合并的分支)</p>
+<pre><code>git checkout -b &lt;branchName&gt; origin/&lt;branchName&gt;
+</code></pre><p>b.2)拉取需要被合并的分支(通常是master)保证本地代码最新</p>
+<pre><code>git pull origin master
+</code></pre><p>b.3)合并分支到master</p>
+<pre><code>git merge --no-ff -m &quot;remark&quot; master
+</code></pre><p>⚠️ –no-ff会正常合并同时在master上生成一个新节点。</p>
+<p>4.代码提交远程仓库</p>
+<h2 id="本地开发"><a href="#本地开发" class="headerlink" title="本地开发"></a>本地开发</h2><p>1.克隆仓库代码</p>
+<pre><code>git clone &lt;git repo url&gt;
+</code></pre><p>2.创建新分支</p>
+<pre><code>git checkout -b &lt;branchName&gt;
+</code></pre><p>删除分支</p>
+<pre><code>git branch -d &lt;branchName&gt;
+</code></pre><p>⚠️-D 强制删除</p>
+<p>3.保存工作区状态</p>
+<pre><code>git stash
+</code></pre><p>恢复当前工作区状态</p>
+<pre><code>git stash pop
+</code></pre><p>查看保存的状态</p>
+<pre><code>git stash list
+</code></pre><p>3.撤销修改</p>
+<p>a)丢弃工作区修改</p>
+<pre><code>git checkout -- ./&lt;fileName&gt;
+</code></pre><p>b)回退到某个版本(将丢弃该版本号后的所有commit)</p>
+<pre><code>git reset --hard &lt;versionNo&gt;
+</code></pre><p>c)撤销某个commit并将改动放到缓存区</p>
+<pre><code>git reset --soft &lt;versionNo&gt;
+</code></pre><h2 id="git仓库迁移（保留所有commit记录）"><a href="#git仓库迁移（保留所有commit记录）" class="headerlink" title="git仓库迁移（保留所有commit记录）"></a>git仓库迁移（保留所有commit记录）</h2><p>1.在本地空文件夹中，克隆一份原仓库裸版本。</p>
+<pre><code>&gt; git clone --bare &lt;git地址&gt;
+</code></pre><p>2.创建新仓库并拷贝地址</p>
+<p>3.以镜像推送的方式将代码上传到新仓库中。</p>
+<pre><code>&gt; cd new-project.git
+&gt; git push --mirror &lt;git地址&gt;
+</code></pre><p>4.删除本地代码及原有仓库文件<br>5.将新仓库代码clone到本地</p>
+<pre><code>&gt; git clone &lt;git地址&gt;
+</code></pre><h2 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h2><p>1.查看远程仓库地址</p>
+<pre><code>git remote -v
+</code></pre><p>2.查看本地及远程所有分支及当前版本</p>
+<pre><code>git branch -a -v
+</code></pre><p>3.查看使用过的命令记录</p>
+<pre><code>git reflog
+</code></pre><p>4.查看提交记录</p>
+<pre><code>git log
+</code></pre>
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/06/23/read-list/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2019/06/12/print-summary/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>

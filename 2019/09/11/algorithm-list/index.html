@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="算法刷题300问">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>算法刷题300问 - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            算法刷题300问
+            
+          </h1>
+          <p class="posted-on">
+            
+                2019-09-11
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p><del>小傻瓜，哪来的300问😂</del></p>
+<a id="more"></a>
+<p><strong>1. Two Sum</strong></p>
+<p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
+<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+</code></pre><p><strong>Solution:</strong></p>
+<pre><code>var twoSum = function(nums, target) {
+    let len = nums.length,
+        result = [];
+
+    for(let i = 0; i &lt; len; i++) {
+        for(let j = i + 1; j &lt; len; j++) {
+            let curI = nums[i],
+                curJ = nums[j];
+
+            if(curI + curJ === target) {
+                result.push(i);
+                result.push(j);
+            }
+        }
+    }
+
+    return result;
+};
+</code></pre><hr>
+<p><strong>2. Add Two Numbers</strong></p>
+<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<p><strong>Example:</strong></p>
+<pre><code>Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
+Output: 7 -&gt; 0 -&gt; 8
+Explanation: 342 + 465 = 807
+</code></pre><p><strong>Solution:</strong></p>
+<pre><code>/**
+* Definition for singly-linked list.
+* function ListNode(val) {
+*     this.val = val;
+*     this.next = null;
+* }
+*/
+/**
+* @param {ListNode} l1
+* @param {ListNode} l2
+* @return {ListNode}
+*/
+var addTwoNumbers = function(l1, l2) {
+
+    let add = 0, // 每一项的加数
+        result = null, // 结果返回的首项
+        curNode = null; // 当前的节点
+
+    // 只要l1或者l2中还有值就继续循环
+    while(l1 || l2 ) {
+        // 若l1或l2中不存在节点了，则值为0
+        let a = l1? l1.val : 0,
+            b = l2? l2.val : 0;
+
+        // 当前的值为 两个节点中的值以及加数的和
+        let sum = a + b + add;
+        // ~ =&gt; -(x + 1) ~~ =&gt; -(-(x + 1) + 1)  ~~ 即 parseInt()
+        add = ~~(sum / 10); 
+
+        // 去除加数后的当前节点的值 即若大于10则取个位数
+        let node = new ListNode(sum % 10);
+
+        // 构造返回链表的节点
+        if(!result) {
+            result = curNode = node;
+        } else {
+            curNode.next = node;
+            curNode = node;
+        }
+
+        // 移动l1的节点
+        if(l1){
+            l1 = l1.next;
+        }
+
+        // 移动l2的节点
+        if(l2) {
+            l2 = l2.next;
+        }
+    }
+
+    // 如果最后的节点还有加数，则创建新的节点，保存加数
+    if(add) {
+        let node = new ListNode(add);
+        curNode.next = node;
+    }
+
+    return result;
+};
+</code></pre><p>知识引申：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators" target="_blank" rel="noopener">按位操作符</a></p>
+<hr>
+<p><strong>3. Longest Substring Without Repeating Characters</strong></p>
+<p>Given a string, find the length of the longest substring without repeating characters.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: &quot;abcabcbb&quot;
+Output: 3 
+Explanation: The answer is &quot;abc&quot;, with the length of 3. 
+</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: &quot;bbbbb&quot;
+Output: 1
+Explanation: The answer is &quot;b&quot;, with the length of 1.
+</code></pre><p><strong>Example 3:</strong></p>
+<pre><code>Input: &quot;pwwkew&quot;
+Output: 3
+Explanation: The answer is &quot;wke&quot;, with the length of 3. 
+
+Note that the answer must be a substring, 
+&quot;pwke&quot; is a subsequence and not a substring.
+</code></pre><p><strong>Solution:</strong></p>
+<pre><code>var lengthOfLongestSubstring = function(s) {
+    let result = 0,
+        temp = 0,
+        ind = 0,
+        subStr = s.substr(),
+        subObj = {};
+
+    while(ind &lt; subStr.length) {
+        let chart = subStr[ind];
+        if(subObj[chart] !== undefined) {
+            // 将当前子字符串的长度与之前最大子字符串的长度进行比较取较大的值
+            if(temp &gt; result) result = temp;
+            // 将下标移动回重复的字符后一位
+            ind = subStr.indexOf(chart) + 1;
+            // 截取判断过的子字符串
+            subStr = subStr.substr(ind);
+            // 将子字符对象与记长变量清空
+            subObj = {};
+            temp = 0;
+            ind = 0;
+        } else {
+            // 将子字符录入对象中
+            subObj[chart] = 1;
+            // 将当前子字符串的长度加1
+            temp++;
+            // 访问下一个字符
+            ind++;
+        }
+    }
+
+    // 将最后一个子字符串的长度与之前保留的最大子字符串长度进行比较取较大值
+    if(temp &gt; result) result = temp;
+
+    return result;
+};
+</code></pre><hr>
+<p><strong>5. Longest Palindromic Substring</strong></p>
+<p>Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: &quot;babad&quot;
+Output: &quot;bab&quot;
+Note: &quot;aba&quot; is also a valid answer.
+</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: &quot;cbbd&quot;
+Output: &quot;bb&quot;
+</code></pre><p><strong>Solution:</strong></p>
+<pre><code>/**
+* @param {string} s
+* @return {string}
+*/
+var longestPalindrome = function(s) {
+    let left = right = 0,
+        len = s.length;
+
+    for(let i = 0; i &lt; len; i++) {
+        // 奇数个数对称
+        let l = r = i;
+        // 判断是否相等
+        while(l &gt;= 0 &amp;&amp; r &lt; len &amp;&amp; s[l] == s[r]) {
+            l -= 1;
+            r += 1;
+        }
+        // r - 1 -  (l + 1) 将之前循环多加和多减的1抹去，然后同right - left的值做比较
+        if(r - l - 2 &gt; right - left) {
+            left = l + 1;
+            right = r - 1;
+        }
+
+        // 偶数个数对称
+        l = i;
+        r = i + 1;
+        while(l &gt;= 0 &amp;&amp; r &lt; len &amp;&amp; s[l] == s[r]) {
+            l -= 1;
+            r += 1;
+        }
+        if(r - l - 2 &gt; right - left) {
+            left = l + 1;
+            right = r - 1;
+        }
+    }
+
+    return s.substring(left, right + 1);
+};
+</code></pre><hr>
+<p><strong>6. ZigZag Conversion</strong></p>
+<p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>
+<pre><code>P   A   H   N
+A P L S I I G
+Y   I   R
+</code></pre><p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: s = &quot;PAYPALISHIRING&quot;, numRows = 3
+Output: &quot;PAHNAPLSIIGYIR&quot;
+</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: s = &quot;PAYPALISHIRING&quot;, numRows = 4
+Output: &quot;PINALSIGYAHRPI&quot;
+Explanation:
+
+P     I    N
+A   L S  I G
+Y A   H R
+P     I
+</code></pre><p><strong>Solution:</strong></p>
+<pre><code>/**
+* @param {string} s
+* @param {number} numRows
+* @return {string}
+*/
+var convert = function(s, numRows) {
+    // 若分行为1，则直接返回原字符串
+    if(numRows &lt;= 1) {
+        return s;
+    }
+
+    let len = s.length,
+        // 链表数组
+        linkList = [],
+        // 保存最后结果
+        ans = &apos;&apos;,
+        // Z形移动的下标
+        linkIndex = 0,
+        // 标识下标当前该如何移动的标志， true为增 false为减
+        signal = false; 
+
+    for(let i = 0; i &lt; len; i++) {
+        // 链表节点
+        let node = new Node(s[i]);
+        // 到达Z两端，需要转折
+        if(i % (numRows - 1) == 0) {
+            signal = !signal;
+        }
+
+        if(signal) {
+            // 增
+            linkIndex = i % (numRows - 1);
+        } else {
+            // 减
+            linkIndex = (numRows - 1) - (i % (numRows - 1));
+        }
+
+        // 第一个节点
+        if(linkList[linkIndex] == undefined) {
+            linkList[linkIndex] = node;
+        } else {
+            let head = linkList[linkIndex];
+            // 找到最后一个节点
+            while(!!head.next) head = head.next;
+            // 将节点挂到当前行的最后一个
+            head.next = node;
+        }
+    }
+
+    // 将链表中的字符取出来
+    linkList.map((head) =&gt; {
+        while(head) {
+            ans += head.val;
+            head = head.next;
+        }
+    });
+
+    return ans;
+};
+
+// 链表节点
+function Node(val) {
+    this.val = val;
+    this.next = null;
+}
+</code></pre><hr>
+<p><strong>7. Reverse Integer</strong><br>Given a 32-bit signed integer, reverse digits of an integer.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: 123
+Output: 321
+</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: -123
+Output: -321
+</code></pre><p><strong>Example 3:</strong></p>
+<pre><code>Input: 120
+Output: 21
+</code></pre><p><strong>Note:</strong><br>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
+<p><strong>Solution:</strong></p>
+<pre><code>/**
+* @param {number} x
+* @return {number}
+*/
+var reverse = function(x) {
+    // 标识数字正负
+    let signal = true,
+        x_arr = `${x}`.split(&apos;&apos;), // 将数字拆分为数组
+        ans = 0;
+
+    if(x &lt; 0) {
+        // 输入数字为负
+        signal = false;
+        // 将负号退出数组
+        x_arr.shift();
+    }
+
+    // 将数字逆序
+    x_arr.reverse();
+    // 将数组转为数字
+    ans = +x_arr.join(&apos;&apos;);
+    // 为ans加入符号
+    if(!signal) {
+        ans = -ans;
+    }
+
+    // 判断逆序的数字是否超出32位有符号整数的范围
+    if(ans &gt; (Math.pow(2, 31) - 1) || ans &lt; -Math.pow(2, 31)) {
+        ans = 0;
+    }
+
+    return ans;
+};
+</code></pre><hr>
+<p><strong>9. Palindrome Number</strong><br>Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.</p>
+<p><strong>Example 1:</strong></p>
+<pre><code>Input: 121
+Output: true
+</code></pre><p><strong>Example 2:</strong></p>
+<pre><code>Input: -121
+Output: false
+Explanation: From left to right, it reads -121.
+    From right to left, it becomes 121-. Therefore it is not a palindrome.
+</code></pre><p><strong>Example 3:</strong></p>
+<pre><code>Input: 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+</code></pre><p><strong>Follow up:</strong><br>Coud you solve it without converting the integer to a string?</p>
+<p><strong>Solution:</strong></p>
+<pre><code>/**
+* @param {number} x
+* @return {boolean}
+*/
+var isPalindrome = function(x) {
+    // 如果为负数，直接返回
+    if(x &lt; 0) {
+        return false;
+    }
+
+    // 保存各个位数上的数字
+    let num_list = [],
+        num = x;
+
+    // 将input的数字拆解为数字数组
+    while(num) {
+        let tmp = num % 10;
+        num_list.push(tmp);
+        num = ~~(num / 10);
+    }
+
+    // 计算数字数组的位数
+    let len = num_list.length,
+        index = r_num = 0; // index指示当前位数 r_num为逆序之后的数字
+
+    // 遍历拆解之后的数字数组
+    while(index &lt; len) {
+        // 将各个下标中的数字，转化为对应位数上的数字
+        r_num += num_list[index] * Math.pow(10, len - 1 - index);
+        index++;
+    }
+
+    // 如果逆序之后与input数字相等，则返回true，否则返回false
+    if(r_num == x) {
+        return true;
+    } else {
+        return false;
+    }
+
+};
+</code></pre>
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/09/16/accessibility/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2019/08/22/gulp-server/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>

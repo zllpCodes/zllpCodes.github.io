@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="学习笔记整理">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>学习笔记整理 - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            学习笔记整理
+            
+          </h1>
+          <p class="posted-on">
+            
+                2019-07-09
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+                <a href="/tags/前端/" rel="tag">
+                  前端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>存放零碎知识点，方便查阅</p>
+<a id="more"></a>
+<h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><p>允许类型：number, string, boolean, null, object, Array</p>
+<p>JSON.stringyfy(obj, [key1, key2, …] | function pretreatment, Serialized format)</p>
+<p>JSON.parse(obj, function transform)</p>
+<h2 id="操作DOM"><a href="#操作DOM" class="headerlink" title="操作DOM"></a>操作DOM</h2><p>查找DOM</p>
+<ol>
+<li><p>document.getElementById(‘id’)<br>document.getElementsByClassName(‘className’)<br>document.getElementByTagName(‘div’)</p>
+</li>
+<li><p>document.querySelector(‘#id’)<br>document.querySelectorAll(‘div.high &gt; p’)</p>
+</li>
+</ol>
+<p>插入DOM</p>
+<ol>
+<li>parentNode.appendChild(childNode)</li>
+<li>parentNode.insertBefore(childNode, refNode)</li>
+<li>parentNode.innerHTML = childNode<br>⚠️此方法有副作用<br>若要添加文本可以使用innerText或textContent(后者返回包括hide的文本)</li>
+</ol>
+<p>创建DOM</p>
+<p>document.createElement(‘div’)</p>
+<p>删除DOM</p>
+<p>parentNode.removeChild(childNode)<br>⚠️删除后，childNode还存在内存中，可以再次被添加到某处</p>
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><p>兼容浏览器的原生AJAX实现</p>
+<pre><code>var request = null;
+if(window.XMLHttpRequest) {
+  request = new XMLHttpRequest();
+} else {
+  request = new ActiveXObject(&apos;Microsoft.XMLHTTP&apos;);
+}
+
+if(request != null) {
+  request.onreadystatechange = function () {
+    if(request.readyState === 4) {
+      if(request.status === 200) {
+        // success
+      } else {
+        // fail
+      }
+    }
+  };
+
+  // GET
+  request.open(&apos;GET&apos;, url, true);
+  request.send(null);
+
+  // POST
+  var data = {key:val};
+  request.open(&apos;POST&apos;, url, true);
+  request.send(data);
+
+} else {
+  alert(&apos;您的浏览器不支持AjAX&apos;);
+}
+</code></pre><p>浏览器安全限制：协议、域名、端口完全相同才能发送AJAX请求，否则即为跨域。<br>解决方案: </p>
+<ol>
+<li><p>JSONP(JSON with Padding) ⚠️此实现方法现已废弃<br>缺点：只能GET请求。<br>实现方式：通过请求script资源实现跨域，<code>&lt;img src /&gt;</code>同理。<br>请求script资源返回responseFunction({data})，data即为所需的数据。<br>responseFunction在当前项目中实现，类似回调函数。</p>
+</li>
+<li><p>服务端转发。<br>服务端发送请求不存在跨域问题，若要使用跨域数据，可以通过服务端转发。</p>
+</li>
+<li><p>CORS(cross-origin Resourse Sharing) ⚠️H5以上支持<br>在CORS通信过程中，都是由浏览器自动完成。实现CORS通信的关键是服务器。只要服务器实现了CORS接口，就可以跨源通信。<br><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">跨域资源共享 CORS 详解</a></p>
+</li>
+</ol>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/07/17/charles-same-wifi/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2019/06/28/half-year-summary/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>

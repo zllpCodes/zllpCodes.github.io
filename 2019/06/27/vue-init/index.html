@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="从零开始 Webpack 4 配置 Vue项目">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>从零开始 Webpack 4 配置 Vue项目 - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            从零开始 Webpack 4 配置 Vue项目
+            
+          </h1>
+          <p class="posted-on">
+            
+                2019-06-27
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+                <a href="/tags/前端/" rel="tag">
+                  前端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>超详细！<del>看不懂就来搬代码好了！</del> 怎么可能看不懂～</p>
+<a id="more"></a>
+<p><em>我们不生产代码，我们只是代码的搬运工。 ——鲁迅</em></p>
+<p><a href="https://github.com/zllpCodes/vue-init" target="_blank" rel="noopener">想要详细代码戳我戳我(●’◡’●)</a></p>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>打开Terminal并跳转到你希望的目录下，然后创建一个新的文件夹。</p>
+<pre><code>&gt; mkdir vue-init
+</code></pre><p>进入该目录。</p>
+<pre><code>&gt; cd vue-init
+</code></pre><p>npm 初始化。<code>-y | --yes</code> 默认所有配置项都为yes。</p>
+<pre><code>&gt; npm init -y
+</code></pre><h2 id="安装webpack相关包"><a href="#安装webpack相关包" class="headerlink" title="安装webpack相关包"></a>安装webpack相关包</h2><p><strong>webpack</strong>：前端打包工具<br><strong>webpack-cli</strong>：在webpack 3中，webpack和CLI都在同一个包中，但在第4版中，两者被分开了，因此这里必须安装CLI<br><strong>webpack-dev-server</strong>：用于起一个本地服务器<br><strong>webpack-merge</strong>：用于合并webpack基础配置项</p>
+<p><code>-D | --save-dev</code>将包记录到<code>&quot;devDependencies&quot;</code>中，<br><code>-S | --save</code>将包记录到<code>&quot;dependencies&quot;</code>中，<br>两者的区别即是否会在生产环境中被使用。若在生产环境中需要用到，则记录到dependencies中，反之则记录到devDependencies中。</p>
+<pre><code>&gt; npm i webpack webpack-cli webpack-dev-server webpack-merge -D
+</code></pre><h2 id="安装其他需要用到的包"><a href="#安装其他需要用到的包" class="headerlink" title="安装其他需要用到的包"></a>安装其他需要用到的包</h2><h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><p>Vue文件解析</p>
+<pre><code>&gt; npm i vue-loader vue-template-compiler  -D
+</code></pre><p>Vue、VueRouter及Axios</p>
+<pre><code>&gt; npm i vue vue-router axios -S
+</code></pre><h3 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h3><p>Js语法解析(如ES6、ES7等浏览器暂不支持的语法)</p>
+<pre><code>&gt; npm i @babel/core @babel/preset-env babel-loader -D
+</code></pre><p>Js文件压缩</p>
+<pre><code>&gt; npm i uglifyjs-webpack-plugin -D
+</code></pre><h3 id="Style"><a href="#Style" class="headerlink" title="Style"></a>Style</h3><p>Css Loader</p>
+<pre><code>&gt; npm i css-loader style-loader -D
+</code></pre><p>Sass Loader</p>
+<pre><code>&gt; npm i node-sass sass-loader -D
+</code></pre><p>Postcss Loder &amp; Autoprefixer</p>
+<pre><code>&gt; npm i postcss-loader autoprefixer -D
+</code></pre><p>分离、压缩Css文件</p>
+<pre><code>&gt; npm i mini-css-extract-plugin optimize-css-assets-webpack-plugin -D
+</code></pre><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>图片loader</p>
+<pre><code>&gt; npm i file-loader url-loader -D
+</code></pre><p>图片压缩</p>
+<pre><code>&gt; npm i image-webpack-loader -D
+</code></pre><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>HTML模板解析</p>
+<pre><code>&gt; npm i html-webpack-plugin -D
+</code></pre><p>清除dist文件夹</p>
+<pre><code>&gt; npm i clean-webpack-plugin -D
+</code></pre><h2 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h2><p>为之后行文方便，在此把项目全部目录列出来。<br>可以先把同名文件和文件夹创建好，占坑～</p>
+<pre><code>vue-init
+|-- build
+    |-- webpack.base.js
+    |-- webpack.dev.js
+    |-- webpack.prod.js
+|-- dist
+|-- public
+    |-- json
+        |-- pictureList.json
+    |-- index.html
+    |-- mocker.js
+|-- src
+    |-- entry
+        |-- index.js
+    |-- imgs
+    |-- pages
+        |-- components
+            |-- nav.vue
+        |-- App.vue
+        |-- Index.vue
+        |-- List.vue
+    |-- style
+        |-- app.scss
+        |-- common.scss
+        |-- index.scss
+        |-- nav.scss
+|-- .babelrc
+|-- .gitignore
+|-- package-lock.json
+|-- package.json
+|-- postcss.config.js
+</code></pre><h2 id="编写webapck配置"><a href="#编写webapck配置" class="headerlink" title="编写webapck配置"></a>编写webapck配置</h2><p><strong>url-loader</strong>对未设置或者小于limit设置的图片进行转换，以base64的格式被img的src所使用;而对于大于limit byte的图片用<strong>file-loader</strong>进行解析。<br>图片打包成base64可以减少网络请求，但代价是样式文件将变大。<br>因此需要根据实际情况进行取舍。</p>
+<pre><code>// webpack.base.js
+// 存放通用配置
+
+const webpack = require(&apos;webpack&apos;),
+    path = require(&apos;path&apos;),
+    // 用于解析vue文件
+    VueLoaderPlugin = require(&apos;vue-loader/lib/plugin&apos;),
+    // html文件插件，将静态文件引入html中 
+    HTMLWebpackPlugin = require(&apos;html-webpack-plugin&apos;);
+
+module.exports = {
+    entry: &apos;./src/entry/index.js&apos;, // 项目的入口文件
+    module: {
+        rules:[
+            {
+                test: /\.js$/,
+                loader: &apos;babel-loader&apos;,
+                exclude: /node_modules/
+            },
+            {
+                test: /\.vue$/,
+                loader: &apos;vue-loader&apos;
+            },
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    &apos;style-loader&apos;,
+                    &apos;css-loader&apos;,
+                    &apos;postcss-loader&apos;,
+                    &apos;sass-loader&apos;
+                ]
+            },
+            {
+                test: /\.(png|jpg|svg|gif)$/,
+                use: [
+                    {
+                        loader: &apos;url-loader&apos;,
+                        options: {
+                            limit: 5000,
+                            name: &apos;imgs/[name].[ext]&apos;
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    plugins: [
+        new VueLoaderPlugin(),
+        // 自动将静态资源引入html文件中
+        new HTMLWebpackPlugin({
+            template: path.resolve(__dirname, &apos;../public/index.html&apos;)
+        })
+    ]
+};
+</code></pre><p>devServer中是开发时所需的重要配置。</p>
+<pre><code>// webpack.dev.js
+// development环境
+
+const merge = require(&apos;webpack-merge&apos;),
+    common = require(&apos;./webpack.base&apos;),
+    path = require(&apos;path&apos;),
+    apiMocker = require(&apos;webpack-api-mocker&apos;);
+
+module.exports = merge(common, {
+    mode: &apos;development&apos;,
+    devtool: &apos;inline-source-map&apos;,
+    devServer: {
+        // 入口页面所在文件夹
+        contentBase: &apos;../public&apos;,
+        // 将所有请求都打回index.html，因为此处配置是单页面应用
+        historyApiFallback: true,
+        // 本地mock数据配置，mock数据配置在mocker.js中
+        before: function(app) {
+            apiMocker(app, path.resolve(&apos;public/mocker.js&apos;));
+        },
+        // 监听端口
+        port:8889,
+        // 启动后自动打开网址
+        open: &apos;http://localhost:8889/&apos;,
+        // 让同网域其他设备访问本地服务
+        host:&apos;0.0.0.0&apos;
+    },
+    output: {
+        filename: &apos;js/[name].[hash:5].js&apos;,
+        path: path.resolve(__dirname, &apos;../dist&apos;)
+    }
+});
+</code></pre><p>webpack.prod.js文件中新增了很多包，使得js和css文件、图片更加规整简洁。</p>
+<pre><code>// webpack.prod.js
+// production
+const merge = require(&apos;webpack-merge&apos;),
+    common = require(&apos;./webpack.base&apos;),
+    path = require(&apos;path&apos;),
+    // 清除dist文件夹
+    {CleanWebpackPlugin} = require(&apos;clean-webpack-plugin&apos;),
+    // 处理、打包css文件 功能类似style-loader
+    MiniCssExtractPlugin = require(&apos;mini-css-extract-plugin&apos;),
+    // 用于压缩css文件
+    OptimizeCSSAssetsPlugin = require(&quot;optimize-css-assets-webpack-plugin&quot;),
+    // 压缩js文件
+    UglifyJsPlugin = require(&quot;uglifyjs-webpack-plugin&quot;);
+
+module.exports = merge(common, {
+    mode: &apos;production&apos;,
+    output: {
+        filename: &apos;js/[name].[hash:5].js&apos;,
+        path: path.resolve(__dirname, &apos;../dist&apos;)
+    },
+    optimization: {
+        // 将引入的第三方库文件单独打包
+        splitChunks: {
+            // 所有引入的文件都打包
+            chunks: &apos;all&apos;,
+            cacheGroups: {
+                vendor: {
+                    name: &apos;vendor&apos;,
+                    test: /[\\/]node_module[\\/]/,
+                    priority: -10,
+                    chunks: &apos;initial&apos;
+                }
+            }
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: &apos;babel-loader&apos;,
+                exclude: /node_modules/
+            },
+            {
+                test: /\.vue$/,
+                loader: &apos;vue-loader&apos;
+            },
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    {
+                        // 使用MiniCssExtractPlugin.loader替代style-loader
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            // 解决图片路径不对的问题
+                            publicPath: &apos;../&apos;
+                        }
+                    },
+                    &apos;css-loader&apos;,
+                    &apos;postcss-loader&apos;,
+                    &apos;sass-loader&apos;
+                ]
+            },
+            {
+                test: /\.(png|jpg|svg|gif)$/,
+                use: [
+                    {
+                        loader: &apos;url-loader&apos;,
+                        options: {
+                            limit: 10240,
+                            name: &apos;imgs/[name].[contenthash:5].[ext]&apos;
+                        }
+                    },
+                    {
+                        // 对图片进行压缩处理，配置项参考官方文档
+                        loader: &apos;image-webpack-loader&apos;,
+                        options: {
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 65
+                            },
+                            optipng: {
+                                enabled: false
+                            },
+                            pngquant: {
+                                quality: &apos;65-90&apos;,
+                                speed: 4
+                            },
+                            gifsicle: {
+                                interlaced: false
+                            },
+                            webp: {
+                            quality: 75
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: &apos;css/[name].[hash:5].css&apos;
+        }),
+        new OptimizeCSSAssetsPlugin(),
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                compress: {
+                    // 去除debugger和console
+                    drop_debugger: true,
+                    drop_console: true
+                }
+            },
+            cache: true,
+            parallel: true,
+            sourceMap: false
+        })
+    ]
+});
+</code></pre><h2 id="编写其他配置"><a href="#编写其他配置" class="headerlink" title="编写其他配置"></a>编写其他配置</h2><p><code>&quot;presets&quot;</code>参数由插件名和参数对象组成一个数组进行传递。</p>
+<pre><code>// .babelrc
+{
+    &quot;presets&quot;: [
+        [
+            &quot;@babel/preset-env&quot;,
+            {
+                &quot;targets&quot;: {
+                    // 此处为浏览器的查询条件
+                    // 1%：基于全球使用率统计而选择的浏览器版本范围
+                    // last 2 version：每个浏览器的最近两个版本
+                    // not ie &lt;= 8：不小于等于ie8的浏览器版本
+                    &quot;browsers&quot;: [&quot;&gt; 1%&quot;, &quot;last 2 version&quot;, &quot;not ie &lt;= 8&quot;]
+                }
+            }
+        ]
+    ]
+}
+</code></pre><p>postcss增加不同浏览器css样式相关前缀。</p>
+<pre><code>// postcss.config.js
+module.exports = {
+    plugins: [
+        require(&apos;autoprefixer&apos;)
+    ]
+};
+</code></pre><p>在package.json中，加入运行命令。<br><code>--hot</code>热加载。当代码有变化时，会自动刷新页面。<br><code>--open</code>启动项目时，自动在浏览器打开网页。<br><code>--env.NODE_ENV=development</code>设置环境变量，可以在页面中取到当前所处的环境，进行不同的设置。<br><code>--config &lt;filepath&gt;</code>需要读取的配置文件路径。</p>
+<pre><code>// package.json
+// ...
+&quot;scripts&quot;: {
+    &quot;start&quot;: &quot;webpack-dev-server --hot --open --env.NODE_ENV=development --config build/webpack.dev.js&quot;,
+    &quot;build&quot;: &quot;webpack --env.NODE_ENV=production --config build/webpack.prod.js&quot;
+},
+// ...
+</code></pre><h2 id="编写页面代码"><a href="#编写页面代码" class="headerlink" title="编写页面代码"></a>编写页面代码</h2><pre><code>// index.html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;/&gt;
+        &lt;title&gt;Vue init&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!-- 留出坑来给Vue发挥 --&gt;
+        &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>index.js是连接webpack和Vue项目的重要文件，在此对Vue项目进行一些基础配置并作为webpack打包的入口。</p>
+<pre><code>// index.js
+import Vue from &apos;vue&apos;;
+import VueRouter from &apos;vue-router&apos;;
+import axios from &apos;axios&apos;;
+
+import &apos;../style/common.scss&apos;;
+
+import App from &apos;../pages/App.vue&apos;;
+import Index from &apos;../pages/Index.vue&apos;;
+import List from &apos;../pages/List.vue&apos;;
+
+// 将VueRouter注册到Vue上
+Vue.use(VueRouter);
+// 将axios挂载到Vue原型链上，方便使用
+Vue.prototype.$ajax = axios;
+
+// 创建路由列表
+const router = new VueRouter({
+    routes: [{
+            path: &apos;/&apos;,
+            component: Index
+        },
+        {
+            path: &apos;/list&apos;,
+            component: List
+        }
+    ]
+});
+
+// 创建Vue实例
+new Vue({
+    el: &apos;#app&apos;,
+    router,
+    render: h =&gt; h(App)
+});
+</code></pre><p>App.vue作为整个项目兜底的页面，可以将公共的部分都提取到App.vue页，此处还有一个VueRouter的配置需要注意。</p>
+<pre><code>// App.vue
+
+&lt;template&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;myNav&gt;&lt;/myNav&gt;
+        &lt;!-- ⚠️给VueRoutter留坑！！ --&gt;
+        &lt;router-view&gt;&lt;/router-view&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+// 引入导航栏组件
+import myNav from &quot;./components/nav.vue&quot;;
+export default {
+    // 注册组件
+    components: {
+        myNav
+    }
+};
+&lt;/script&gt;
+</code></pre><p>来看index.vue页面。</p>
+<pre><code>// index.vue
+&lt;template&gt;
+&lt;div id=&quot;index&quot;&gt;
+    &lt;h1&gt;hello world!&lt;/h1&gt;
+    &lt;p&gt;halo Viola&lt;/p&gt;
+    &lt;div v-for=&quot;(img, index) in imgList&quot; :key=&quot;index&quot;&gt;
+        &lt;img :src=&quot;img&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;nice-pic&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    name: &quot;index&quot;,
+    data: function() {
+        return {
+            imgList: []
+        };
+    },
+    mounted() {
+        this.$ajax.get(&quot;/api/pictureList&quot;).then(res =&gt; {
+            let result = res.data;
+            if(result.code !== 200) return;
+            this.imgList = result.data;
+        });
+    }
+};
+&lt;/script&gt;
+</code></pre><p>在index.vue页面中用到了异步请求。异步请求是前端开发中最基本的需求之一。如果前端开发还需要等待接口先开发出来，那浪费的时间估计都能完成开发了；所以在本地mock数据是前端必备技能。</p>
+<pre><code>// mocker.js
+
+const fs = require(&apos;fs&apos;);
+
+function fromJSONFile(filename) {
+  return (req, res) =&gt; {
+    // 读取mock数据json文件
+    const data = fs.readFileSync(`public/json/${filename}.json`).toString();
+    // 解析json文件
+    const json = JSON.parse(data);
+    return res.json(json);
+  };
+}
+
+const proxy = {
+    // 格式：&apos;请求头 请求路径&apos;
+    &apos;GET /api/pictureList&apos;: fromJSONFile(&apos;pictureList&apos;)
+};
+
+module.exports = proxy;
+</code></pre><p>页面样式通过单独的scss文件编写(为什么要单独编写样式？见下文 <em>遇到的问题</em> )</p>
+<pre><code>// common.scss
+// 引入各个页面的样式
+@import &apos;./app.scss&apos;;
+@import &apos;./index.scss&apos;;
+@import &apos;./nav.scss&apos;;
+</code></pre><p>此处仅列举index.scss作为示例。</p>
+<pre><code>// index.scss
+
+// sass语法
+$width: 50rem;
+
+#index {
+    margin-top: 60px;
+    // postcss将自动添加前缀
+    transform: rotate(0deg);
+    img {
+        width: $width;
+    }
+    .nice-pic {
+        width: 80%;
+        height: $width;
+        margin: 0 auto;
+        // 背景图引入，小于10kb将被编译成base64
+        background: url(&apos;../imgs/1.jpg&apos;);
+    }
+}
+</code></pre><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><h3 id="提取Vue文件中的Css"><a href="#提取Vue文件中的Css" class="headerlink" title="提取Vue文件中的Css"></a>提取Vue文件中的Css</h3><p>因为Vue文件中的样式代码会默认打包进js中，因而生成的js文件非常庞大，可能会导致首屏加载速度非常慢，直接影响用户体验，所以执念的想要把样式文件分离出来。在网上搜索了好半天，找到了官方文档以及民间方案，但是一一尝试之后都没有达到效果。考虑到这可能是webpack 4及相关包实现的问题，因而不想再在这个问题上纠结，便选择了Plan B。</p>
+<p><strong>Plan B</strong>即将样式文件放到style文件夹中，就各个页面单独一个样式文件进行维护，再引入enrty/index.js中进行编译，此方案可以达成css和js分离的目的。</p>
+<p>在下方还是放出我在网上搜索到的官方+民间方案，诸君若感兴趣可以自行尝试。</p>
+<p><a href="https://vue-loader.vuejs.org/zh/guide/extract-css.html#webpack-4" target="_blank" rel="noopener">官方网页：CSS 提取</a><br><a href="https://www.jianshu.com/p/b230a69be59b" target="_blank" rel="noopener">民间网页: webpack4实现css打包</a></p>
+<hr>
+<p>参考网页:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/image-webpack-loader" target="_blank" rel="noopener">image-webpack-loader</a></li>
+<li><a href="https://www.babeljs.cn/docs/presets" target="_blank" rel="noopener">预设（Presets）</a></li>
+<li><a href="https://juejin.im/post/5b8cff326fb9a019fd1474d6" target="_blank" rel="noopener">Browserslist</a></li>
+</ul>
+<p><em>wow！～完结撒花</em> 🎉🎉🎉<br><em>趁着设计还没给定稿，摸鱼写了代码和博客，接下来就是业务逻辑开发啦～</em><br><em>敬请期待～</em> 😉</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/06/28/half-year-summary/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2019/06/23/read-list/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="ITForGirls Frontend">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>ITForGirls Frontend - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            ITForGirls Frontend
+            
+          </h1>
+          <p class="posted-on">
+            
+                2018-11-27
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+                <a href="/tags/前端/" rel="tag">
+                  前端
+                </a>
+              
+                <a href="/tags/ITForGirls/" rel="tag">
+                  ITForGirls
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>ITForGirls项目-前端搭建和总结</p>
+<a id="more"></a>
+<h2 id="前期构思"><a href="#前期构思" class="headerlink" title="前期构思"></a>前期构思</h2><p>网站搭建用到的前端技术：</p>
+<ul>
+<li><a href="https://www.webpackjs.com/" target="_blank" rel="noopener">webpack</a></li>
+<li><a href="https://www.sasscss.com/" target="_blank" rel="noopener">scss|sass</a></li>
+<li><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">es6</a></li>
+<li><a href="https://handlebarsjs.com/" target="_blank" rel="noopener">handlebars</a></li>
+</ul>
+<p>考虑到网站现阶段只有3个页面，而且页面功能简单明确，没有页面间的交互需求。<br>因而前端架构应采用轻便简单适合敏捷开发的技术：</p>
+<ol>
+<li>选择webpack构建工程化开发，解决模块间依赖和打包等问题</li>
+<li>选择scss|sass扩展、简化样式代码</li>
+<li>选择原生Js es6语法版本，实现页面前后端数据交互</li>
+<li>选择handlebars模板引擎，动态生成HTML</li>
+</ol>
+<p>前面提到，页面少且结构简单，因而不适合采用Vue、React等前端框架，甚至连jQuery等Js库也显得冗余。<br>所以Js部分使用原生es6版本，通过webpack + babel转码为es5版本，以便让代码能够在浏览器端运行。</p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><blockquote>
+<p>itforgirls-frontend<br>|- /dist　　 打包后文件存放目录<br>|- /src　　 源码文件目录<br>　|- /assets　　 存放图片文件<br>　|- /handlebars　　 存放模板引擎文件<br>　|- /scripts　　 存放js文件<br>　|- /styles　　 存放scss文件<br>　|- /libs　　  存放插件文件<br>|- /public 　　 存放页面html文件<br>|- .gitignore 　　 git提交远程仓库忽略文件夹名单<br>|- package.json 　　 npm包版本管理文件<br>|- webpack.com.js　　  webapck通用配置文件<br>|- webpack.dev.js 　　 webpack开发环境配置文件</p>
+</blockquote>
+<p>以上，是在整个项目中，我们需要关注的文件(带有 / 的表示文件夹)。<br>或许对于初学者来说，已经有些晕头转向了，别着急，我们会一点一点弄懂的。😀<br>好啦，现在先抛开上面的目录结构，我们一点一点的实现。</p>
+<h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><h3 id="安装node和npm"><a href="#安装node和npm" class="headerlink" title="安装node和npm"></a>安装node和npm</h3><blockquote>
+<p><a href="https://nodejs.org/zh-cn/download/releases/" target="_blank" rel="noopener">node下载地址</a></p>
+</blockquote>
+<pre><code>&gt; node -v
+&gt; 8.10.0
+&gt; npm -v
+&gt; 5.6.0
+</code></pre><p>因为node版本更新很快，或许8.10版本对你来说已经很老旧了。但是考虑到依赖包的版本支持问题，希望你依然能够选择node 8.x版本，否则可能出现奇怪又不重要的问题无法解决，打击你的学习积极性。</p>
+<p>下载完成后，请在安装时，记得勾选【自动加入环境变量】的选项。希望你一切顺利，如果遇到问题，你可以在网上寻找帮助，许多文章详细讲述了安装流程，在此不再赘述。</p>
+<p>如果你安装好了，「此文默认系统为Win，即使是其他系统大部分操作都相似，不同的操作或快捷键可以在网上搜索学习」可以按<code>Home + R</code> 输入<code>cmd</code>后回车。会弹出一个窗口，这就是我们的命令行窗口。在里面输入 <code>node -v</code> 后回车，返回node版本号，则一切顺利，node安装完成。（同理，<code>npm -v</code> 返回npm版本号，则npm安装完成。npm会随node自动安装）</p>
+<h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p>本文不涉及git教程，如果对git闻所未闻或者听过但没用过，以及用过但不知其然的小伙伴，推荐这个<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">git教程</a>。在此默认，继续往下读的你，是已经知道git并且有能力使用它帮助我们管理代码了。</p>
+<blockquote>
+<p><a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git下载地址</a> </p>
+</blockquote>
+<h3 id="安装VS-Code"><a href="#安装VS-Code" class="headerlink" title="安装VS Code"></a>安装VS Code</h3><p>工欲善其事必先利其器。如果都在记事本里面写代码，那程序员的假发应该也要秃了吧。所以，写代码要变成一种享受的事，那就需要一个舒适的环境，不必要的换行格式化，就交给一个聪明的编辑器去做好啦。在此推荐，号称插件大全的<a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>。支持多种编程语言，支持定制化主题，总之能让写代码，变成一件很爽~的事。</p>
+<h2 id="开始编码"><a href="#开始编码" class="headerlink" title="开始编码"></a>开始编码</h2><h3 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3><p>讲了这么多，终于要开始写代码了，是不是还有点小激动。别着急，我们在正式写代码之前，还有一些事要做，都是非常必要的事。</p>
+<p>首先，在一个你确定找得到的目录下，(最好不是桌面，请保持桌面整洁😀)创建一个文件夹，就叫itforgirls-frontend好啦。你当然可以取一个你认为更可爱的名字，但是请保证，你在之后能够把它们的目录结构对应上。</p>
+<p>然后，进入这个文件夹，在文件夹中，<code>右键</code>&gt;<code>Git Bash Here</code>，弹出一个窗口。有了刚刚的经验，这个呢，也是命令行，是Git自带的命令行。你当然也可以使用之前的cmd，只要保证命令行中的路径是当前的itforgirls-frontend目录下，就ok了。在命令行中<strong>分别</strong>输入<code>npm init</code>以及<code>git init</code>，进行npm和git的初始化。</p>
+<p>最后，打开VS Code，点击左上角的<code>文件</code>&gt;<code>打开文件夹</code>，然后找到你刚刚创建的itforgirls-frontend文件夹。(这就是为啥让你一定要找得到创建文件夹目录的原因)<br>现在，这个文件夹里面，已经有一个.git文件夹和package.json文件啦。还记得之前项目的目录结构么？对，现在派上用场了。按照同名文件夹、文件创建好之后，我们终于开始来写代码了！🙌</p>
+<h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><p>先来看看，我们刚刚使用命令创建的package.json文件。</p>
+<blockquote>
+<p>每个项目的根目录下面，一般都有一个package.json文件，定义了这个项目所需要的各种模块，以及项目的配置信息（比如名称、版本、许可证等元数据）。npm install命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。</p>
+</blockquote>
+<p>将以下代码，键入你的package.json文件中。当然也可以拷贝，不过敲一遍，会有更深的印象。</p>
+<p>package.json</p>
+<pre><code>{
+    &quot;name&quot;: &quot;itforgirls-frontend&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;,
+    &quot;description&quot;: &quot;itforgirls-frontend&quot;,
+    &quot;main&quot;: &quot;index.js&quot;,
+    &quot;scripts&quot;: {
+        &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+    },
+    &quot;author&quot;: &quot;zll&quot;, 
+    &quot;license&quot;: &quot;ISC&quot;,
+    &quot;devDependencies&quot;: {
+        &quot;babel-core&quot;: &quot;^6.26.3&quot;,
+        &quot;babel-loader&quot;: &quot;^7.1.5&quot;,
+        &quot;babel-preset-es2015&quot;: &quot;^6.24.1&quot;,
+        &quot;clean-webpack-plugin&quot;: &quot;^0.1.19&quot;,
+        &quot;cross-env&quot;: &quot;^5.2.0&quot;,
+        &quot;css-loader&quot;: &quot;^0.28.8&quot;,
+        &quot;extract-text-webpack-plugin&quot;: &quot;^3.0.2&quot;,
+        &quot;file-loader&quot;: &quot;^1.1.11&quot;,
+        &quot;handlebars&quot;: &quot;^4.0.11&quot;,
+        &quot;handlebars-loader&quot;: &quot;^1.7.0&quot;,
+        &quot;html-webpack-plugin&quot;: &quot;^3.2.0&quot;,
+        &quot;node-sass&quot;: &quot;^4.9.3&quot;,
+        &quot;sass-loader&quot;: &quot;^7.1.0&quot;,
+        &quot;style-loader&quot;: &quot;^0.22.1&quot;,
+        &quot;url-loader&quot;: &quot;1.0.1&quot;,
+        &quot;webpack&quot;: &quot;^3.6.0&quot;,
+        &quot;webpack-dev-server&quot;: &quot;^2.9.1&quot;,
+        &quot;webpack-hot-middleware&quot;: &quot;^2.22.3&quot;
+    }
+}
+</code></pre><p>上面代码中，值得注意的是 <code>devDependencies</code>这个字段。虽然这里我们把项目所需的所有包都列了出来，但是实际开发中，一般都是按需添加的。前面的key是包的名字，后面的value是包的版本号。有些包并不一定是向下兼容的，所以有时为了某种功能，会选用低版本的包也不一定。当然，在考虑补丁和项目更新迭代的情况下，选用越新越高版本的包，当然是更优的选择。</p>
+<p>好啦，让我们在Git Bash中运行命令，<code>npm install -d</code>(-d 表示将安装包的过程打印在窗口中，以便我们了解进展情况，以及是否有报错。)</p>
+<p>在漫长的等待之后(当然有办法少等一会儿，至于方法，就留给你自己去探索啦，比如搜一下：<code>NPM 镜像</code>？)，我们的根目录下，将会多出一个node_modules的文件夹。这个呢，就是我们安装的包下载到本地的文件啦。</p>
+<h3 id="webpack-js"><a href="#webpack-js" class="headerlink" title="webpack.js"></a>webpack.js</h3><p>实现前端工程化的方式有很多，我们这里选用了webpack。<br>配置根据应用环境不同分为dev和prod，即开发环境和生产环境。</p>
+<p>两种环境下相同的配置</p>
+<p>webpack.js</p>
+<pre><code>const path = require(&apos;path&apos;)
+const webpack = require(&apos;webpack&apos;)
+const CleanWebpackPlugin = require(&apos;clean-webpack-plugin&apos;)
+const ExtractTextPlugin = require(&apos;extract-text-webpack-plugin&apos;)
+
+module.exports = {
+    // 项目入口文件
+    entry: {
+        &apos;common&apos;: path.resolve(__dirname, `src/scripts/common.js`),
+    },
+    // 打包后输出的文件路径
+    output: {
+        publicPath: &apos;/&apos;,
+        path: path.resolve(__dirname, &apos;dist/&apos;),
+        filename: &apos;static/scripts/common.js&apos;
+    },
+    resolve: {
+        // 配置别名 能够在引用时少写路径，更直观
+        alias: {
+            //...
+            Scripts: path.resolve(__dirname, &apos;src/scripts&apos;),
+            //...
+        }
+    },
+    // 配置loader 
+    // loader 用于对模块的源代码进行转换
+    // loader 可以使你在 import 或&quot;加载&quot;模块时预处理文件。
+    module: {
+        // 处理js文件
+        rules: [{
+                // 文件名匹配正则
+                test: /\.js$/,
+                // 排除的文件
+                exclude: /node_modules/,
+                // 使用的loader及loader所需的配置参数
+                use: [{
+                    loader: &apos;babel-loader&apos;,
+                    options: {
+                        presets: [&apos;es2015&apos;]
+                    }
+                }]
+            },
+            //...
+        ]
+    },
+    // loader 被用于转换某些类型的模块，而插件则可以用于执行范围更广的任务
+    // 插件的范围包括：打包优化、资源管理和注入环境变量
+    // loader是针对某个文件，而plugin是针对整个打包流程
+    plugins: [
+        // 每次都清空dist文件夹，保证文件夹内容是最新的，避免冗余
+        new CleanWebpackPlugin([&apos;dist&apos;]),
+        // 将静态文件独立打包到css文件内
+        new ExtractTextPlugin({
+            filename: `static/styles/common.css`
+        }),
+        // 热处理 即可以不刷新页面，自动更新修改内容
+        new webpack.HotModuleReplacementPlugin()
+    ]
+};
+</code></pre><p>开发环境下特有的配置</p>
+<pre><code>module.exports = {
+    //...
+    devServer: {
+        // html文件所在的目录
+        contentBase: &apos;./public&apos;,
+        // 是否热加载
+        hot: true,
+        // 是否启动时自动在浏览器打开
+        open: true,
+        // 本地服务器ip地址
+        host: &apos;127.0.0.1&apos;,
+        // 监听端口号
+        port: 8899,
+        // 配置代理
+        proxy: {
+            // 需要用到代理的路由，及代理转发的地址
+            &apos;/api/*&apos;: &apos;http://localhost:8000/&apos;,
+            // *必需配置 跨域请求
+            changeOrigin: true
+        }
+    },
+    //...
+}
+</code></pre><h3 id="源文件部分"><a href="#源文件部分" class="headerlink" title="源文件部分"></a>源文件部分</h3><p>所有的前端工程化项目都会经历以上各个过程，而接下来的部分是当前项目所选择的构建方式。这么说也就代表，其他项目完全可能有另外的构建方式，甚至当前项目也可以有不同的构建方式，但是不论选择什么方式构建项目，我们的目标都很明确，那就是：<strong>更方便更简单地写出更好更高质量的代码。</strong></p>
+<p>我们将会从以下三个方面进行详细了解：</p>
+<ol>
+<li>网页样式（Styles）</li>
+<li>网页交互（Scripts）</li>
+<li>网站具体功能（代码实现）</li>
+</ol>
+<p><strong>1. 网页样式（Styles）</strong></p>
+<p>SCSS是前端常用热门的CSS扩展语言。如果你用过Less或者Sass，那么你也可以选用它们；如果你对什么Less还是Sass这种听起来像病毒感冒一样的东西完全不知所云，那么试着了解一下，你会发现写CSS代码真的可以很简单且富有逻辑性。</p>
+<pre><code>SCSS 是 Sass 3 引入新的语法，其语法完全兼容 CSS3，并且继承了 Sass 的强大功能。
+</code></pre><p><em>关于 SCSS 与 Sass的异同可以看这篇官方文章：<a href="http://sass.bootcss.com/docs/scss-for-sass-users/" target="_blank" rel="noopener">戳我戳我</a></em></p>
+<p>鉴于SCSS使用方法不是本文重点，而且SCSS也不是什么新东西，网上已经有很多文章写过如何学习和使用SCSS了，再配合详细全面的官网手册，找一个整块的时间认真学习相信会很快上手的。以下附上指路链接：</p>
+<ul>
+<li><a href="http://sass.bootcss.com/docs/sass-reference/" target="_blank" rel="noopener"> 官网 Sass参考手册</a></li>
+<li><a href="https://sass-lang.com/guide" target="_blank" rel="noopener"> Sass: Sass Basics</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="noopener"> 阮一峰 Sass用法指南</a></li>
+</ul>
+<p>考虑到当前的页面数量少且样式重复度高，最后打包出来的样式都保存到同一个CSS文件内。这样做还有一个显而易见的好处，那就是浏览器缓存。第一次访问请求静态资源后在本地缓存起来，之后再打开同一个网站就读取本地文件，从而减少用户等待时间给用户更好地访问体验。</p>
+<p>但在写代码的时候，如果将所有的代码都堆在一个文件里面，刚开始或许问题不大，但是过了几个月再来看这些代码呢？再或者，出现bug需要查问题的时候呢？又或者，你写的代码将转给其他人维护的时候呢？想象一下，如果你的同事将所有的样式都堆在一个文件里面，而你来接手这个项目的时候，如果你忍不住要骂ta，那么你也肯定会被别人这么骂的。┑(￣Д ￣)┍ 别给自己找麻烦，别给别人找麻烦。</p>
+<p>何况我们还有webpack呢，通过它我们就可以把分块的代码打包输出到一个文件里面，而我们写代码的时候，怎么分块更方便更整洁就怎么分。至于webpack的配置，我们在之前的 <strong>webpack.js</strong> 已经讲过了。如果还没弄懂的小可爱，一定要再好好理解一下，多看几篇文章，自己多写写代码，肯定可以明白的！~</p>
+<p>那么我们应该怎么拆分样式呢？按照页面拆分再将公用的部分提取出来放到一个文件里面，然后都引入到要打包生成的样式文件中，这是一种常规的分法。还有一种是按照功能分。比如，列表的样式放在一起，轮播图的样式放在一起，弹窗的样式放在一起，等等。这是一个不错的分法，而且比前一种有一个明显的好处：如果另外一个项目里，也要用到相同样式的弹窗，但是列表和轮播图不一样，那么我们就可以只引入弹窗的样式文件，这样可以避免引入列表和轮播图的样式导致不必要的代码冗余。</p>
+<p>common.scss</p>
+<pre><code>// 引入拆分的样式文件
+// Styles是在webpack中配置的路径别名
+@import &apos;Styles/variable.scss&apos;;
+@import &apos;Styles/normalize.scss&apos;;
+@import &apos;Styles/screen.scss&apos;;
+@import &apos;Styles/nav.scss&apos;;
+//...
+</code></pre><p>在variable.scss中是常用的属性值。如背景色、字体大小等，如果改动变量初始化时的值，引用变量的地方自动会被替换为新的值。</p>
+<p>variable.scss</p>
+<pre><code>$font-size: 16px;
+$white: #fff;
+$body-bgcolor: #f8f6ea;
+$nav-color: #234C40;
+//...
+</code></pre><p>在normalize.scss中是浏览器的默认属性统一化。每个浏览器都有自己的默认样式，如果在写代码的时候不小心忘记设置了某个属性值，很可能导致网页在不同的浏览器中“看起来”不一样。为了避免这样的问题出现，我们就自己写一些统一化的样式，覆盖掉浏览器的默认样式，使得我们的网页在不同的浏览器里面也能“看起来”一样。</p>
+<p>normalize.scss</p>
+<pre><code>/**
+* Correct the font size and margin on `h1` elements
+* in Chrome, Firefox, and Safari.
+*/
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+//...
+</code></pre><p>在screen.scss中是媒体查询和自适应的样式。在大于720px的屏幕上，html标签的font-size属性的值为15px，而其后代nav元素有一个左右为3rem的内边距。</p>
+<p><em>关于响应式和自适应 可以看这篇：<a href="https://juejin.im/entry/58b6414a128fe1006421bfa7" target="_blank" rel="noopener">戳我戳我</a></em><br><em>关于CSS中的相对单位 rem 可以看这篇：<a href="https://juejin.im/post/5b41bf63f265da0f8b2f9656" target="_blank" rel="noopener">戳我戳我</a></em></p>
+<p>screen.scss</p>
+<pre><code>@media screen and (min-width: 720px) {
+    html {
+        font-size: 15px;
+    }
+
+    nav {
+        padding: 0 3rem;
+    }
+}
+//...
+</code></pre><p>在nav.scss中是导航栏功能模块样式。嵌套是SCSS常用的语法，能够在写样式代码的时候更简便且更具逻辑性，能够一眼看出各个选择器之间的继承关系。而变量引用也简化了不必要的相同值的重复书写，使得代码更容易维护。</p>
+<p>nav.scss</p>
+<pre><code>@import &apos;Styles/variable.scss&apos;;
+
+nav {
+    position: fixed;
+    top: 0;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: $body-bgcolor;
+    overflow: hidden;
+
+    .nav-logo {
+        float: left;
+        width: 10rem;
+        height: 4rem;
+        line-height: 4rem;
+
+        img {
+            width: 100%;
+            vertical-align: middle;
+        }
+    }
+
+    .nav-link {
+        float: right;
+        height: 4rem;
+        padding-left: 0;
+        margin: 0;
+        line-height: 4rem;
+        list-style: none;
+
+        li {
+            float: left;
+            margin-right: 1rem;
+
+            a {
+                color: $nav-color;
+            }
+        }
+
+        .to-home {
+            margin-left: 1rem;
+        }
+    }
+}
+</code></pre><p><strong>2. 网页交互（Scripts）</strong></p>
+<p>ES6是Js的新版本语法，相较于ES5有很大程度的改变，新增了许多特性，本项目采用ES6语法书写Js代码，所以了解常用的ES6语法很有必要。同样，这里不会开设ES6语法课程，所以，传送门收好。😀</p>
+<ul>
+<li><a href="https://es6.io/" target="_blank" rel="noopener">es6.io</a></li>
+<li><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">阮一峰 ECMAScript6入门</a></li>
+</ul>
+<p>因为没有使用第三方库和框架，所以自己写了个utils用来存放常用的方法，方便开发时使用。</p>
+<p>utils.js</p>
+<pre><code>// 通过id获取元素
+function getEleById(id) {
+    return document.getElementById(id);
+}
+
+// 通过classname获取元素
+function getEleByClass(classname) {
+    return document.getElementsByClassName(classname)[0];
+}
+
+// 去除字符串前后的空格
+function strTrim(str) {
+    return str.replace(/(^\s*)|(\s*$)/g, &quot;&quot;);
+}
+
+//...
+
+// es6语法 用import命令引入模块时，可以为该模块指定任意名字
+export default {
+    getEleById,
+    getEleByClass,
+    strTrim,
+    //...
+}
+</code></pre><p>现有功能重复的很少，因此根据页面进行拆分，然后引入common.js中，根据page变量不同的值进行加载。</p>
+<p>common.js</p>
+<pre><code>// 引入common.scss 为了让webpack打包生成css文件
+import &apos;Styles/common.scss&apos;;
+
+// 引入根据页面拆分的js文件
+import {
+    handleLink,
+    handleNotLink
+} from &apos;Scripts/match-up.js&apos;;
+import {
+    handleSubmit
+} from &apos;Scripts/search-form.js&apos;;
+
+// 引入utils文件中的常用函数
+import Utils from &apos;Scripts/utils.js&apos;;
+
+// 引入图片资源 可以在webpack中配置处理图片的相关loader
+import BannerImg from &apos;Assets/banner.jpg&apos;;
+import LogoImg from &apos;Assets/logo.png&apos;;
+import LoadingImg from &apos;Assets/loading.gif&apos;;
+
+// 在网页加载完成后，出发onload事件，执行处理函数
+window.onload = () =&gt; {
+
+    if (page === &apos;index&apos;) {
+        // 加载logo和banner图
+        Utils.getEleById(&apos;logo-img&apos;).src = LogoImg;
+        Utils.getEleById(&apos;banner-img&apos;).src = BannerImg;
+
+    } else if (page === &apos;searchForm&apos;) {
+        // search-form页面代码
+        // 加载loading图片
+        Utils.getEleById(&apos;loading-img&apos;).src = LoadingImg;
+        Utils.getEleById(&apos;search-form&apos;).onsubmit = handleSubmit;
+
+    } else if (page === &apos;matchUp&apos;) {
+        // match-up页面代码
+        // 为相应元素绑定click事件处理函数
+        Utils.getEleById(&apos;loading-img&apos;).src = LoadingImg;
+        Utils.getEleById(&apos;link&apos;).onclick = handleLink;
+        Utils.getEleById(&apos;notLink&apos;).onclick = handleNotLink;
+
+    }
+}
+</code></pre><p><strong>3. 网站具体功能（代码实现）</strong></p>
+<p>在用户填写了自己的信息提交系统并且在系统中匹配成功了，随后系统将发送邮件给用户，附上匹配成功页面链接。用户点击链接进入匹配成功页。如果用户同意进行连接，可以通过点击 <strong>进行连接</strong> 按钮，让匹配成功的双方收到对方的邮箱，从而进行后续的交流。</p>
+<pre><code>export function handleLink (event) {
+  // 阻止用户多次点击，重复发送请求
+  event.target.disabled = true;
+  // 展示loading样式
+  Utils.getEleByClass(&apos;search-loading-wrapper&apos;).classList.remove(&apos;hide&apos;);
+
+  // 获取match_tag
+  let match_tag = Utils.getQueryVariable(&apos;match_tag&apos;);
+  // 构造参数
+  let data = {
+     is_link: true,
+     match_tag
+  }
+  // 调用ajax方法
+  Utils.ajax({
+    // 发送post请求
+    method: &apos;POST&apos;,
+    // path为请求的url
+    url: path,
+    // post请求携带的数据
+    data,
+    // 请求返回后出发的回调函数
+    callback: (resp) =&gt; {
+        // 隐藏loading样式
+        Utils.getEleByClass(&apos;search-loading-wrapper&apos;).classList.add(&apos;hide&apos;);
+
+        // 判断返回的结果是否成功
+        if (resp.status == 200 &amp;&amp; resp.data.code == 0) {
+            // 成功提示
+            Utils.getEleById(&apos;infos&apos;).innerText = `连接成功！邮件已发送，请查收`;
+        } else {
+            // 失败提示
+            Utils.getEleById(&apos;infos&apos;).innerText = `连接失败，请刷新网页重试`;
+        }
+    }
+  });
+}
+</code></pre><hr>
+<p><em>2019.03.06 终于完结撒花 ❀❀❀ 🎉🎉🎉</em></p>
+<p><em>这篇文章第一次写写不下去停笔了3个多月，然后为了写下去，大改了webpack配置，几乎重写，把之前觉得别扭的地方改掉之后终于有了写下去的动力，然后写着写着又发现之前写代码的时候别扭的地方因为查别的问题时而发现了更合理顺畅的写法。这种感觉真的很好，虽然是一个点一个小地方，可是明显感觉到自己的进步，好像更有了些力量，一点一点积累着，等待质变的发生。嗯，行在路上，真好。</em></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2018/11/28/the-little-prince/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2018/11/23/itforgirls-intro/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>

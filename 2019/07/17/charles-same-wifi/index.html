@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="Charles配置手机代理">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>Charles配置手机代理 - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            Charles配置手机代理
+            
+          </h1>
+          <p class="posted-on">
+            
+                2019-07-17
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+                <a href="/tags/前端/" rel="tag">
+                  前端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p><strong>前情提要</strong></p>
+<p>因为换了OS系统，之前的抓包工具Fiddler没法用了（虽然有OS版本的但是比较麻烦且做得不太好）所以必须要尝试新的抓包工具了。同时考虑到工作上移动端H5页面占比很大，所以需要在手机上抓包调试的情况非常多，因而抓包工具也必须要兼顾到此需求。在网上搜索一番，比对过广大网友的推荐后，选择了Charles~</p>
+<p>虽然一开始用起来不太顺手，但是多用几次之后感觉还是很不错的，也推荐给大家~<br>(废话 (╯‵□′)╯︵┻━┻ 不是用的Charles谁点开这篇文章啊！)</p>
+<p>好好好，别急别急，马上就进入正题了~</p>
+<h2 id="配置Charles"><a href="#配置Charles" class="headerlink" title="配置Charles"></a>配置Charles</h2><ol>
+<li>打开Charles。</li>
+<li>在顶部菜单栏中，选中Proxy -&gt; Proxy Settings。</li>
+<li>在Proxies中，配置port或者默认使用8888，然后⚠️勾选Enable transparent HTTP proxing。</li>
+</ol>
+<h2 id="配置手机"><a href="#配置手机" class="headerlink" title="配置手机"></a>配置手机</h2><ol>
+<li>将手机连接到和电脑同一个网络中。</li>
+<li>进入到你手机的wifi配置里面，找到配置代理的地方。如果不知道怎么弄可以网上搜索 机型+配置代理。</li>
+<li>服务器填写你的电脑IP地址，port填写你之前填写的或者默认为8888。<br>(电脑ip可以在命令行中查看，Win系统为ipconfig | Os系统为ifconfig；还可以通过Charles查看：Help -&gt; Local IP Address)</li>
+</ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>⚠️⚠️⚠️电脑一定要用 <strong>网线</strong> 连接网络，绝对不能用wifi，否则就会像我把上面所有的准备都做好了，但就是出现不了弹窗。在网上搜索半天，然后把网线一插，啊哈？？？居然就可以了…🤷‍</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/08/17/negative-margin/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2019/07/09/notes-summary/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>

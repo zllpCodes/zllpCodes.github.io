@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="gulp-webserver搭建本地服务">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>gulp-webserver搭建本地服务 - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            gulp-webserver搭建本地服务
+            
+          </h1>
+          <p class="posted-on">
+            
+                2019-08-22
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+                <a href="/tags/前端/" rel="tag">
+                  前端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p><strong>前情提要</strong></p>
+<p>这个是三年前的老项目了，换了运营换了后端又换了前端。但是最近老板对这个项目很重视，所以改动非常之频繁。前端代码混在后端项目里，每次部署还得麻烦后端，而且最致命的是：必须依赖后端部署了接口之后，再代理本地资源，在测试环境测试，根本没法本地mock数据。综上所述，前后端分离势必要做了。</p>
+<p>前端项目是gulp打包的，最初考虑推倒然后用webpack重新搭一套（现有项目基本都是webpack）。但是再一思索：gulp还不至于那么不堪到恨不得赶紧甩掉，而且这样的做法实在有些舍近求远了。因而怀着学习gulp扩展技能树的念头，网上搜索一番，找到官方文档。自己摸索摸索，倒也配置成功了。走了些弯路，有了些经验，记录在此，以供参考。</p>
+<h2 id="安装gulp-webserver"><a href="#安装gulp-webserver" class="headerlink" title="安装gulp-webserver"></a>安装gulp-webserver</h2><pre><code>&gt; npm install -D gulp-webserver
+</code></pre><h2 id="json配置"><a href="#json配置" class="headerlink" title="json配置"></a>json配置</h2><p>在根目录下，创建json文件夹及proxies.json文件。<br>proxies.json文件，将接口对应到本地json文件。</p>
+<pre><code>// proxies.json
+{
+    &quot;/abc&quot;: &quot;abc.json&quot;,
+    &quot;/123&quot;: &quot;123.json&quot;
+}
+</code></pre><p>json文件夹，用于存放每个接口对应的mock数据。</p>
+<pre><code>|-json
+    |-abc.json
+    |-123.json
+</code></pre><h2 id="编写gulpfile-js"><a href="#编写gulpfile-js" class="headerlink" title="编写gulpfile.js"></a>编写gulpfile.js</h2><pre><code>var fs = require(&apos;fs&apos;);
+var gulp = require(&apos;gulp&apos;);
+var proxies = require(&apos;./proxies.json&apos;);
+var webserver = require(&apos;gulp-webserver&apos;);
+
+// 本地静态资源服务
+gulp.task(&apos;webserver&apos;, function () {
+    return gulp.src(&apos;.&apos;)
+        .pipe(webserver({
+            // 自动打开网页
+            open: true,
+            // 热加载
+            livereload: true,
+            // 运行端口号
+            port: 8089,
+            // 默认访问的html地址，若请求不被处理则返回此html
+            fallback: &apos;./public/admin.html&apos;,
+            // ⚠️关键代码
+            middleware: function (req, res, next) {
+                // 将请求的path提取出来
+                let path = req.originalUrl.split(&apos;?&apos;)[0];
+                // 若请求在我们记录的json对象中，则处理
+                if (path in proxies) {
+                    // 拼接json文件路径
+                    let filename = `./json/${proxies[path]}`;
+                    try {
+                        // 尝试打开json文件
+                        fs.accessSync(filename, fs.constants.R_OK);
+                        // 构造返回对象HTTP头
+                        res.setHeader(&apos;Content-Type&apos;, &apos;application/json&apos;);
+                        // 读取json文件内容即mock数据
+                        var data = fs.readFileSync(filename, &apos;utf-8&apos;);
+                        // 将mock数据装入返回对象
+                        res.end(data);
+                    } catch (err) {
+                        // 构造错误时的返回内容
+                        res.setHeader(&apos;Content-Type&apos;, &apos;application/json&apos;);
+                        res.end(JSON.stringify({
+                            &quot;status&quot;: &quot;没有找到文件&quot;,
+                            &quot;notFound&quot;: filename
+                        }));
+                    }
+                } else {
+                    // 对当前请求不做处理，继续下一个
+                    next();
+                }
+            }
+        }));
+});
+
+// 运行gulp dev即可
+gulp.task(&apos;dev&apos;, [&apos;webserver&apos;], function () {});
+</code></pre>
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/09/11/algorithm-list/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2019/08/17/negative-margin/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>

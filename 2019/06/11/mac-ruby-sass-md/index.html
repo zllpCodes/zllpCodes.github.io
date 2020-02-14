@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="Mac OS系统下配置ruby及安装sass问题总结">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>Mac OS系统下配置ruby及安装sass问题总结 - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            Mac OS系统下配置ruby及安装sass问题总结
+            
+          </h1>
+          <p class="posted-on">
+            
+                2019-06-11
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+                <a href="/tags/前端/" rel="tag">
+                  前端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p><strong>前情提要</strong></p>
+<p>公司特别老的项目正在做重构，但是架不住产品提需求，所以硬着头皮就改了好几年没动过的老代码。改起来感觉还不错，没出啥乱子，但是吧，这个不符合事物发展的规律…果然，到了打包生产环境的静态资源文件的时候就出错了😢。编写样式时用Sass预处理，因此打包的时候需要转为浏览器能够理解的css文件。打包工具采用grunt，开发系统是Mac OS。郁闷啊，需要预装ruby和sass的环境才能运行。掉坑里爬了两天才出坑，今天逞着等后段出接口文档的空档，赶紧写下来记录一下，也算是这坑没有白踩了😄</p>
+<h2 id="brew安装ruby"><a href="#brew安装ruby" class="headerlink" title="brew安装ruby"></a>brew安装ruby</h2><p>啥是brew？我没有咋安装？<a href="https://brew.sh/" target="_blank" rel="noopener">戳我戳我(●’◡’●)</a></p>
+<p>Linux和OS系统自带了ruby</p>
+<pre><code>&gt; ruby -v
+ruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin16]
+</code></pre><p>但是如果你直接使用gem(RubyGems是Ruby的一个包管理器)会报错</p>
+<pre><code>&gt; gem install sass
+ERROR:  While executing gem ... (Gem::FilePermissionError)
+You don&apos;t have write permissions for the /Library/Ruby/Gems/2.3.0 directory.
+</code></pre><p>尝试一下sudo命令</p>
+<pre><code>&gt; sudo gem install sass
+Building native extensions.  This could take a while...
+  ERROR:  Error installing sass: 
+  ERROR: Failed to build gem native extension.
+
+current directory: /Library/Ruby/Gems/2.3.0/gems/ffi-1.11.1/ext/ffi_c
+...
+...
+</code></pre><p>截取了核心的错误提示。也就是错误提示里面：<br><strong>current directory: /Library/Ruby/Gems/2.3.0/gems/ffi-1.11.1/ext/ffi_c</strong><br>当然也可以设置写权限，使用系统自带ruby。但是存在破坏系统环境的危险而且不必要，我们完全可以安装一个Local环境用于开发(和造作)。所以我们使用brew安装ruby。</p>
+<pre><code>&gt; brew search ruby
+==&gt; Formulae
+chruby  jruby rbenv-bundler-ruby-version  ruby-completion   
+ruby@2.4  chruby-fish mruby ruby ✔  ruby-install  ruby@2.5
+...
+...
+</code></pre><p>如果你的ruby这里有一个小✔那表示你其实已经成功安装了ruby那么就不需要执行接下来的install命令，如果没有✔那么赶紧执行install还等什么！</p>
+<pre><code>&gt; brew install ruby
+</code></pre><p>如果你想要重现安装ruby，那么可以使用reinstall命令</p>
+<pre><code>&gt; brew reinstall ruby
+</code></pre><h2 id="配置PATH"><a href="#配置PATH" class="headerlink" title="配置PATH"></a>配置PATH</h2><p>安装好了看看提示，其实提示已经非常清楚了，但是我一开始安装成功后没认真看提示，又兜兜转转一大圈终于回到这里，然后真的是欲哭无泪😣以后真的要认真看提示了，可能就是出坑的光明大道。</p>
+<pre><code>...
+
+By default, binaries installed by gem will be placed into:
+    /usr/local/lib/ruby/gems/2.6.0/bin
+
+You may want to add this to your PATH.
+
+ruby is keg-only, which means it was not symlinked into /usr/local,
+because macOS already provides this software and 
+installing another version in parallel can cause all kinds of trouble.
+
+If you need to have ruby first in your PATH run:
+    echo &apos;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&apos; &gt;&gt; ~/.zshrc
+
+...
+</code></pre><p>关键句子在这：<br><strong>If you need to have ruby first in your PATH run:</strong><br><strong>echo ‘export PATH=”/usr/local/opt/ruby/bin:$PATH”‘ &gt;&gt; ~/.zshrc</strong><br>如果安装了zsh的小伙伴可以按照这个配置到.zshrc文件里面，但是我们还有一个通用的配置方法，接着看。</p>
+<pre><code>&gt; echo $PATH
+/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+</code></pre><p>这个是我们的环境变量，每个path通过一个:分隔。<br>这个环境变量保存在什么文件里面呢？在<strong>/etc/paths</strong>里面。那我们可以将刚刚的ruby访问路径配置到这个文件里面，就可以成功访问本地ruby而非系统ruby啦～<br>但是注意⚠️这里还有一个小坑。路径的读取是从上往下(从前往后)，所以我们要把本地ruby的访问路径配置到系统ruby的访问路径前面，才能正确访问我们的本地ruby。好啦好啦，接下来跟着做。</p>
+<pre><code>&gt; sudo vi /etc/paths
+
+/usr/local/bin
+/usr/bin
+/bin
+/usr/sbin
+/sbin
+~
+~
+</code></pre><p>我们使用了vim打开这个文件，再按一下 <strong>i</strong> 代表insert，就可以插入我们的新路径啦～<br>插入新路径后，变成了这样⬇️</p>
+<pre><code>/usr/local/opt/ruby/bin
+/usr/local/bin
+/usr/bin
+/bin
+/usr/sbin
+/sbin
+</code></pre><p>好啦～重启命令行吧～然后再试试</p>
+<pre><code>&gt; ruby -v
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-darwin16]
+
+&gt; echo $PATH
+/usr/local/opt/ruby/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+</code></pre><p>wow!～ ruby的版本号变了！PATH也更新啦～</p>
+<h2 id="安装sass"><a href="#安装sass" class="headerlink" title="安装sass"></a>安装sass</h2><p>终于啊终于！我们可以安装sass啦！废话少说，敲代码！</p>
+<pre><code>&gt; gem install sass
+...
+Successfully installed sass-3.7.4
+...
+</code></pre><p>sass安装成功啦！～～</p>
+<hr>
+<p><em>呼呼呼～</em><br><em>好久没写文章啦，在此献上一篇踩坑泪文。希望以后的自己能够认真看提示👀</em></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/06/12/print-summary/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2019/03/05/css-animation/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>
