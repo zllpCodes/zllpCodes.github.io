@@ -264,7 +264,7 @@ function Person(name, age, job) {
 
 var p1 = Person(&apos;Elsa&apos;, 24, &apos;queen&apos;);
 p1.sayHi(); // &apos;Elsa&apos;
-</code></pre><p>使用动态原型模式时，不能使用对象字面量重新原型！</p>
+</code></pre><p>使用动态原型模式时，不能使用对象字面量重新改写原型！</p>
 <pre><code>// 动态原型模式
 function Person(name, age, job) {
     this.name = name;
@@ -471,13 +471,193 @@ recurse(5); // 8
 <li><a href="https://zhuanlan.zhihu.com/p/64257809" target="_blank" rel="noopener">结合vue、react、angular谈谈MVC、MVP、MVVM框架</a></li>
 </ul>
 <hr>
-<h2 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML + CSS"></a>HTML + CSS</h2><p><strong>布局</strong></p>
-<ol>
-<li>左右布局</li>
-<li>圣杯布局</li>
-<li>水平垂直居中</li>
-</ol>
-<p><strong>变形</strong><br><strong>过渡</strong><br><strong>动画</strong><br><strong>画布</strong></p>
+<h2 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML + CSS"></a>HTML + CSS</h2><p><strong>左右布局</strong></p>
+<p>左右等宽</p>
+<pre><code>// HTML
+&lt;div class=&quot;wrapper&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;aaaaaa&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;bbbbb&lt;/div&gt;
+&lt;/div&gt;
+
+// float实现
+.wrapper {
+    overflow: hidden;
+}
+
+.left {
+    float: left;
+    width: 50%;
+    height: 100px;
+    background-color: red;
+}
+
+.right {
+    float: left;
+    width: 50%;
+    height: 100px;
+    background-color: blue;
+}
+</code></pre><p>左侧固定宽度，右侧自适应</p>
+<pre><code>// HTML
+&lt;div class=&quot;wrapper&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;aaaaaa&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;bbbbb&lt;/div&gt;
+&lt;/div&gt;
+
+// CSS
+.wrapper {
+    overflow: hidden;
+}
+
+.left {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.right {
+    width: auto; /* 可以不设置，默认为auto */
+    height: 100px;
+    background-color: blue;
+}
+</code></pre><p>右侧固定宽度，左侧自适应</p>
+<pre><code>// HTML
+&lt;div class=&quot;wrapper&quot;&gt;
+    &lt;div class=&quot;right&quot;&gt;bbbbb&lt;/div&gt;
+    &lt;div class=&quot;left&quot;&gt;aaaaaa&lt;/div&gt;
+&lt;/div&gt;
+
+// CSS
+.wrapper {
+    overflow: hidden;
+}
+
+.left {
+    width: auto;
+    height: 100px;
+    background-color: red;
+}
+
+.right {
+    float: right;
+    width: 100px; /* 可以不设置，默认为auto */
+    height: 100px;
+    background-color: blue;
+}
+</code></pre><p><strong>圣杯布局</strong></p>
+<pre><code>// HTML
+&lt;div class=&quot;wrapper&quot;&gt;
+    &lt;div class=&quot;middle&quot;&gt;aaaaaaa&lt;/div&gt;
+    &lt;div class=&quot;left&quot;&gt;bbbbb&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;cccc&lt;/div&gt;
+&lt;/div&gt;
+
+// CSS
+// padding-left为.left框的宽度
+// padding-right为.right框的宽度
+.wrapper {
+    padding: 0 100px; 
+    overflow: hidden;
+}
+
+.middle {
+    float: left;
+    width: 100%;
+    height: 100px;
+    background: yellow;
+}
+
+// position: relative;相对于自身进行定位
+// left的距离为负的.left框的宽度
+.left {
+    position: relative;
+    left: -100px;
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin-left: -100%;
+    background: red;
+}
+
+// right的距离为负的.right框的宽度
+.right {
+    position: relative;
+    right: -100px;
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin-left: -100px;
+    background: blue;
+}
+</code></pre><p><strong>双飞翼布局</strong></p>
+<pre><code>// HTML
+// 注意.middle框要放在.left和.right框的前面渲染
+&lt;div class=&quot;wrapper&quot;&gt;
+    &lt;div class=&quot;middle&quot;&gt;
+        &lt;div class=&quot;inner&quot;&gt;aaaaaaa&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;left&quot;&gt;bbbbb&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;cccc&lt;/div&gt;
+&lt;/div&gt;
+
+// CSS
+.wrapper {
+    overflow: hidden;
+}
+
+.middle {
+    float: left;
+    width: 100%;
+    height: 100px;
+    background: yellow;
+}
+
+// 使用margin将左右两个框的宽度隔开，防止内容遮挡
+.inner {
+    margin-left: 100px;
+    margin-right: 100px; 
+    word-break: break-all;
+}
+
+.left {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin-left: -100%; // 将.left框上移一行
+    background: red;
+}
+
+.right {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin-left: -100px; // 将.right框上移一个自身的宽度
+    background: blue;
+}
+</code></pre><p><strong>水平垂直居中</strong></p>
+<p>display: flex实现</p>
+<pre><code>// HTML
+&lt;div class=&quot;outer&quot;&gt;
+    &lt;div class=&quot;inner&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+// CSS
+.outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    background: red;
+}
+
+.inner {
+    width: 100px;
+    height: 100px;
+    background: yellow;
+}
+</code></pre><p><strong>变形</strong><br><strong>过渡</strong><br><strong>动画</strong><br><strong>画布</strong></p>
 <hr>
 <h2 id="Development"><a href="#Development" class="headerlink" title="Development"></a>Development</h2><p><strong>Webpack</strong></p>
 <ul>
@@ -503,6 +683,7 @@ recurse(5); // 8
 <p><strong>Sass</strong></p>
 <ul>
 <li><a href="https://www.sass.hk/docs/" target="_blank" rel="noopener">Sass中文文档</a></li>
+<li><a href="https://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="noopener">SASS用法指南</a></li>
 </ul>
 <p><strong>Less</strong></p>
 <ul>
