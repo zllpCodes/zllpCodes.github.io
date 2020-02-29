@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="用Selenium爬取微博内容">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>用Selenium爬取微博内容 - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            用Selenium爬取微博内容
+            
+          </h1>
+          <p class="posted-on">
+            
+                2020-02-29
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+                <a href="/tags/后端/" rel="tag">
+                  后端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h1 id="微博爬虫数据"><a href="#微博爬虫数据" class="headerlink" title="微博爬虫数据"></a>微博爬虫数据</h1><ul>
+<li><a href="https://jyjcdd.github.io/summary.html" target="_blank" rel="noopener">微博爬虫数据集合</a></li>
+</ul>
+<h1 id="微博爬虫教程"><a href="#微博爬虫教程" class="headerlink" title="微博爬虫教程"></a>微博爬虫教程</h1><p><strong>如果遇到问题，可以在网上搜索相关提示；若依然无法解决，可到群里@楼楼</strong></p>
+<h2 id="配置爬虫运行环境"><a href="#配置爬虫运行环境" class="headerlink" title="配置爬虫运行环境"></a>配置爬虫运行环境</h2><p>想要运行爬虫的代码，需要先在电脑上配置好运行环境，最首要的是安装Python:</p>
+<p>⚠️安装Python的版本一定要3.x</p>
+<ul>
+<li><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1016959856222624" target="_blank" rel="noopener">安装Python</a></li>
+</ul>
+<p><em>↑这个链接跳转的是一个Python教程，如果没有接触过Python的小伙伴，可以从这个教程开始学习一下Python的基础语法呀~</em></p>
+<p>请确保Python已经安装完成，再进行下述操作；是否成功安装的标准在上文链接中可以看到。</p>
+<p>接下来，我们安装爬虫所需的库文件：selenium。</p>
+<p>打开命令行</p>
+<ul>
+<li>Window系统：通过快捷键 <code>Win+R</code> 打开cmd窗口</li>
+<li>MacOS系统：<a href="https://zh.wikihow.com/%E5%9C%A8Mac%E7%94%B5%E8%84%91%E4%B8%8A%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF" target="_blank" rel="noopener">如何在Mac电脑上打开终端</a></li>
+</ul>
+<p>在命令行中输入以下代码：</p>
+<pre><code>pip install selenium
+</code></pre><p>如果电脑中同时存在Python 2.x和3.x 则将上述代码改为：</p>
+<pre><code>pip3 install selenium
+</code></pre><p>同时，在代码中因为需要将爬取的数据保存到Word及Excel中，因而还需要安装其所依赖的库文件。</p>
+<p>依然是在命令行中，输入以下代码：</p>
+<pre><code>pip install xlwt xlrd xlutils docx
+</code></pre><p>如果电脑中同时存在Python 2.x和3.x 则将上述代码改为：</p>
+<pre><code>pip3 install xlwt xlrd xlutils docx
+</code></pre><p>安装完爬虫依赖的库文件后，我们还需要安装 Chrome驱动：</p>
+<ul>
+<li><a href="http://npm.taobao.org/mirrors/chromedriver/" target="_blank" rel="noopener">chromedirver下载地址</a></li>
+</ul>
+<p>找到你电脑中chrome对应的版本下载，若非对应版本有一定几率会报错。</p>
+<p>chrome的版本可以在chrome 右上角三个点 -&gt; 设置 -&gt; 关于chrome 中查看。</p>
+<p>下载完成后，需要将chromedriver放到系统可以找到的路径下，  </p>
+<p>如果是<strong>Window</strong>系统，<a href="https://blog.csdn.net/u013360850/article/details/54962248" target="_blank" rel="noopener">Windows下配置Chrome WebDriver</a></p>
+<p>如果是<strong>MacOS</strong>系统，则在命令行中依次输入：</p>
+<pre><code>cd /usr/local/bin
+
+open .
+</code></pre><p>然后将下载好的chromedriver文件拖入到此目录下。</p>
+<p>至此，如果一切进展顺利，我们就成功完成了爬虫运行环境的配置工作。</p>
+<p>接下来就是指使小蜘蛛为我们爬取微博数据的时候啦~</p>
+<h2 id="运行爬虫代码"><a href="#运行爬虫代码" class="headerlink" title="运行爬虫代码"></a>运行爬虫代码</h2><ol>
+<li>创建一个你可以找到路径的文件夹</li>
+<li><p>在命令行中，访问该文件夹 </p>
+<ul>
+<li>Win系统下，<a href="https://jingyan.baidu.com/article/425e69e6918df1be15fc1695.html" target="_blank" rel="noopener">CMD如何切换目录</a></li>
+<li>MacOS系统下，<a href="https://zhidao.baidu.com/question/1240910514944666059.html" target="_blank" rel="noopener">mac怎么使用终端cd到这个目录下的命令</a></li>
+</ul>
+</li>
+<li><p>跳转到你的文件夹之后，在命令行中运行以下代码，就把远程仓库中的爬虫代码克隆到你的电脑上啦~</p>
+<pre><code>git clone git@github.com:jyjcdd/jyjcdd.github.io.git
+</code></pre></li>
+<li><p>进入爬虫代码文件夹</p>
+<pre><code>cd jyjcdd.github.io
+</code></pre></li>
+<li><p>在命令行中输入代码运行爬虫</p>
+<p> ⚠️ 如果你之前没有接触过代码，请先看代码解释！</p>
+<pre><code>python weiboExcel.py jydd 2020 01 6 [uername] [password]
+</code></pre><p> <strong>⚠️ 代码解释：</strong><br> <code>python weiboExcel.py</code> 代表用<code>python</code>运行<code>weiboExcel.py</code>文件</p>
+<p> <code>jydd</code> 代表你要抓取的范围，现有范围为: </p>
+<pre><code>jydd — 就业大队 | xqxz — 消歧小组 | hwzs — 海外之声
+</code></pre><p> <code>2020</code> <code>01</code> 代表你要抓取的年份和月份</p>
+<p> <code>6</code> 代表当前这个月所发微博的页数，需要到微博查看</p>
+<p> <code>[username] [password]</code> 是大队的微博登录账号和密码</p>
+</li>
+</ol>
+<p>如果一切进展顺利，爬虫将会开始执行代码，然后爬取微博数据啦~</p>
+<p>如果进展不顺利，那就多拜拜雍正让他治一治bug吧~</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2020/02/22/interview-summary/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>
