@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="工作中遇到的奇怪bug😂不吐不快(5)">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>工作中遇到的奇怪bug😂不吐不快(5) - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            工作中遇到的奇怪bug😂不吐不快(5)
+            
+          </h1>
+          <p class="posted-on">
+            
+                2019-08-21
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+                <a href="/tags/吐槽/" rel="tag">
+                  吐槽
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h3 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h3><p>工作嘛，总有一堆烦心事；每天就是努力扮演一个情绪稳定的成年人。<br>然后在遇到奇奇怪怪的bug之后，总能一秒破功，让人抓狂，尤其是当bug实在是太智障的时候，让人不禁想问一句：“这尼玛都什么沙雕玩意儿？！”</p>
+<p><strong>⚠️在此绝不diss任何码农、攻城狮、程序猿。生活不易，头顶易秃，和气生财。</strong></p>
+<h2 id="React中同一事件分割处理"><a href="#React中同一事件分割处理" class="headerlink" title="React中同一事件分割处理"></a>React中同一事件分割处理</h2><p>这个槽不用我吐了，官方自己就说了：</p>
+<pre><code>我们经常维护一些组件，组件起初很简单，但是逐渐会被状态逻辑和副作用充斥。
+每个生命周期常常包含一些不相关的逻辑。
+例如，组件常常在 componentDidMount 和 componentDidUpdate 中获取数据。
+但是，同一个 componentDidMount 中可能也包含很多其它的逻辑，
+如设置事件监听，而之后需在 componentWillUnmount 中清除。
+相互关联且需要对照修改的代码被进行了拆分，
+而完全不相关的代码却在同一个方法中组合在一起。
+如此很容易产生 bug，并且导致逻辑不一致。
+</code></pre><p>今天是第二次掉坑里了。测试环境时，接口返回数据快在 componentDidMount 就获取到了数据，一切ok。到了preview环境里，接口速度慢，结果 componentDidMount 里是默认的数据，因此导致渲染之后样式展示错误。<br>不论怎么说，这个坑，踩了两次，事不过三。</p>
+<hr>
+<p>不论你信不信，我感觉下次还能掉坑里😹<br>但是往好了想，有了以往的经验…<br>往坑里掉的时候，说不定还能来个360°转体满分落地呢~</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/08/22/gulp-server/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2019/08/17/negative-margin/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>

@@ -135,12 +135,64 @@
         </div>
         <!-- Post Main Content -->
         <div class="entry-content has_line_number">
-          <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p><strong>this</strong></p>
-<ul>
+          <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><ul>
+<li><a href="#this">this</a></li>
+<li><a href="#创建对象">创建对象</a></li>
+<li><a href="#继承">继承</a></li>
+<li><a href="#执行环境与作用域">执行环境与作用域</a></li>
+<li><a href="#闭包">闭包</a></li>
+<li><a href="#递归">递归</a></li>
+<li><a href="#MVC、MVP、MVVM">MVC、MVP、MVVM</a></li>
+</ul>
+<h2 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML+CSS"></a>HTML+CSS</h2><ul>
+<li><a href="#左右布局">左右布局</a></li>
+<li><a href="#圣杯布局">圣杯布局</a></li>
+<li><a href="#双飞翼布局">双飞翼布局</a></li>
+<li><a href="#水平垂直居中">水平垂直居中</a></li>
+<li><a href="#变形">变形</a></li>
+<li><a href="#过渡">过渡</a></li>
+<li><a href="#动画">动画</a></li>
+<li><a href="#画布">画布</a></li>
+<li><a href="#层叠顺序">层叠顺序</a></li>
+</ul>
+<h2 id="Development"><a href="#Development" class="headerlink" title="Development"></a>Development</h2><ul>
+<li><a href="#Webpack">Webpack</a></li>
+<li><a href="#Gulp">Gulp</a></li>
+<li><a href="#Git">Git</a></li>
+</ul>
+<h2 id="Frame"><a href="#Frame" class="headerlink" title="Frame"></a>Frame</h2><ul>
+<li><a href="#Vue">Vue</a></li>
+<li><a href="#React">React</a></li>
+<li><a href="#Vue和React">Vue和React</a></li>
+<li><a href="#Sass">Sass</a></li>
+<li><a href="#Less">Less</a></li>
+<li><a href="#小程序">小程序</a></li>
+<li><a href="#jQuery">jQuery</a></li>
+<li><a href="#Bootstrap">Bootstrap</a></li>
+</ul>
+<h2 id="Supplementary"><a href="#Supplementary" class="headerlink" title="Supplementary"></a>Supplementary</h2><ul>
+<li><a href="#NodeJs">NodeJs</a></li>
+<li><a href="#i18Next">i18Next</a></li>
+<li><a href="#Echarts">Echarts</a></li>
+</ul>
+<h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><ul>
+<li><a href="#数组">数组</a></li>
+<li><a href="#链表">链表</a></li>
+<li><a href="#栈">栈</a></li>
+<li><a href="#队列">队列</a></li>
+<li><a href="#散列表">散列表</a></li>
+<li><a href="#树">树</a></li>
+<li><a href="#二叉树">二叉树</a></li>
+<li><a href="#二叉查找树">二叉查找树</a></li>
+<li><a href="#二分查找">二分查找</a></li>
+<li><a href="#冒泡排序">冒泡排序</a></li>
+<li><a href="#快速排序">快速排序</a></li>
+</ul>
+<hr>
+<h2 id="JavaScript-1"><a href="#JavaScript-1" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><ul>
 <li><a href="https://www.ruanyifeng.com/blog/2010/04/using_this_keyword_in_javascript.html" target="_blank" rel="noopener">Javascript 的 this 用法</a></li>
 </ul>
-<p><strong>创建对象</strong></p>
-<p>工厂模式<br>优点：快速创建多个类似对象<br>缺点：无法识别对象的类型</p>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>工厂模式<br>优点：快速创建多个类似对象<br>缺点：无法识别对象的类型</p>
 <pre><code>// 工厂模式
 function createPerson(name, age, job) {
     var o = new Object();
@@ -280,8 +332,7 @@ function Person(name, age, job) {
 
 var p1 = Person(&apos;Elsa&apos;, 24, &apos;queen&apos;);
 p1.sayHi(); // &quot;Hi! I&apos;m Elsa&quot;
-</code></pre><p><strong>继承</strong></p>
-<p>原型链继承<br>优点：具有清晰的继承关系，实例与其继承的对象类型可以通过instanceof进行判断<br>缺点：</p>
+</code></pre><h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>原型链继承<br>优点：具有清晰的继承关系，实例与其继承的对象类型可以通过instanceof进行判断<br>缺点：</p>
 <ol>
 <li>包含引用类型属性的原型被其实例共有，可能造成意外修改</li>
 <li>创建子类型的实例时，无法向超类型的构造函数传递参数</li>
@@ -428,8 +479,7 @@ inheritPrototype(SubType, SupperType);
 SubType.prototype.sayAge = function() {
     alert(this.age);
 };
-</code></pre><p><strong>执行环境与作用域</strong></p>
-<pre><code>执行环境定义了变量或函数的有权访问的其他数据，决定了它们各自的行为。
+</code></pre><h3 id="执行环境与作用域"><a href="#执行环境与作用域" class="headerlink" title="执行环境与作用域"></a>执行环境与作用域</h3><pre><code>执行环境定义了变量或函数的有权访问的其他数据，决定了它们各自的行为。
 每个函数都有自己的执行环境。
 每个执行环境都有一个与之关联的变量对象，环境中定义的所有变量和函数都保存在这个对象中。
 当代码在一个环境中执行时，会创建变量对象的一个作用域链。
@@ -438,8 +488,7 @@ SubType.prototype.sayAge = function() {
 下一个变量对象是外部环境，一直延伸到全局执行环境。
 标识符解析是沿着作用域一级一级搜索的过程，始终从作用域链前端开始，逐级向后，直到找到标识符为止。
 如果找不到标识符，通常会导致错误发生。
-</code></pre><p><strong>闭包</strong></p>
-<pre><code>function outer(name) {
+</code></pre><h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><pre><code>function outer(name) {
     return function () {
         console.log(name);
     }
@@ -449,8 +498,7 @@ outer(&apos;vivi&apos;)(); // vivi
 
 在outer函数执行完后，其活动对象不会被销毁，因为匿名函数的作用域链仍然在引用这个活动对象。
 因此称这个匿名函数为闭包。
-</code></pre><p><strong>递归</strong></p>
-<pre><code>// Description
+</code></pre><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><pre><code>// Description
 You are climbing a stair case. It takes n steps to reach to the top.
 Each time you can either climb 1 or 2 steps. 
 In how many distinct ways can you climb to the top?
@@ -465,14 +513,12 @@ const recurse = function f(n) {
 };
 
 recurse(5); // 8 
-</code></pre><p><strong>MVC MVP MVVM</strong></p>
-<ul>
+</code></pre><h3 id="MVC、MVP、MVVM"><a href="#MVC、MVP、MVVM" class="headerlink" title="MVC、MVP、MVVM"></a>MVC、MVP、MVVM</h3><ul>
 <li><a href="https://www.ruanyifeng.com/blog/2015/02/mvcmvp_mvvm.html" target="_blank" rel="noopener">MVC，MVP 和 MVVM 的图示</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/64257809" target="_blank" rel="noopener">结合vue、react、angular谈谈MVC、MVP、MVVM框架</a></li>
 </ul>
 <hr>
-<h2 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML + CSS"></a>HTML + CSS</h2><p><strong>左右布局</strong></p>
-<p>左右等宽</p>
+<h2 id="HTML-CSS-1"><a href="#HTML-CSS-1" class="headerlink" title="HTML+CSS"></a>HTML+CSS</h2><h3 id="左右布局"><a href="#左右布局" class="headerlink" title="左右布局"></a>左右布局</h3><p>左右等宽</p>
 <pre><code>// HTML
 &lt;div class=&quot;wrapper&quot;&gt;
     &lt;div class=&quot;left&quot;&gt;aaaaaa&lt;/div&gt;
@@ -541,12 +587,11 @@ recurse(5); // 8
 
 .right {
     float: right;
-    width: 100px; /* 可以不设置，默认为auto */
+    width: 100px; 
     height: 100px;
     background-color: blue;
 }
-</code></pre><p><strong>圣杯布局</strong></p>
-<pre><code>// HTML
+</code></pre><h3 id="圣杯布局"><a href="#圣杯布局" class="headerlink" title="圣杯布局"></a>圣杯布局</h3><pre><code>// HTML
 &lt;div class=&quot;wrapper&quot;&gt;
     &lt;div class=&quot;middle&quot;&gt;aaaaaaa&lt;/div&gt;
     &lt;div class=&quot;left&quot;&gt;bbbbb&lt;/div&gt;
@@ -590,8 +635,7 @@ recurse(5); // 8
     margin-left: -100px;
     background: blue;
 }
-</code></pre><p><strong>双飞翼布局</strong></p>
-<pre><code>// HTML
+</code></pre><h3 id="双飞翼布局"><a href="#双飞翼布局" class="headerlink" title="双飞翼布局"></a>双飞翼布局</h3><pre><code>// HTML
 // 注意.middle框要放在.left和.right框的前面渲染
 &lt;div class=&quot;wrapper&quot;&gt;
     &lt;div class=&quot;middle&quot;&gt;
@@ -635,8 +679,7 @@ recurse(5); // 8
     margin-left: -100px; // 将.right框上移一个自身的宽度
     background: blue;
 }
-</code></pre><p><strong>水平垂直居中</strong></p>
-<p>display: flex实现</p>
+</code></pre><h3 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h3><p>display: flex实现</p>
 <pre><code>// HTML
 &lt;div class=&quot;outer&quot;&gt;
     &lt;div class=&quot;inner&quot;&gt;&lt;/div&gt;
@@ -657,84 +700,86 @@ recurse(5); // 8
     height: 100px;
     background: yellow;
 }
-</code></pre><p><strong>变形</strong><br><strong>过渡</strong><br><strong>动画</strong><br><strong>画布</strong></p>
-<hr>
-<h2 id="Development"><a href="#Development" class="headerlink" title="Development"></a>Development</h2><p><strong>Webpack</strong></p>
-<ul>
-<li><a href="https://www.webpackjs.com/concepts/" target="_blank" rel="noopener">Webpack中文文档</a></li>
+</code></pre><h3 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h3><h3 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h3><h3 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h3><h3 id="画布"><a href="#画布" class="headerlink" title="画布"></a>画布</h3><h3 id="层叠顺序"><a href="#层叠顺序" class="headerlink" title="层叠顺序"></a>层叠顺序</h3><ul>
+<li><a href="https://www.cnblogs.com/coco1s/p/5899089.html" target="_blank" rel="noopener">层叠顺序与堆栈上下文知多少</a></li>
 </ul>
-<p><strong>Gulp</strong></p>
-<ul>
+<hr>
+<h2 id="Development-1"><a href="#Development-1" class="headerlink" title="Development"></a>Development</h2><h3 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h3><ul>
+<li><a href="https://www.webpackjs.com/concepts/" target="_blank" rel="noopener">Webpack中文文档</a></li>
+<li><a href="https://juejin.im/post/5e5c65fc6fb9a07cd00d8838" target="_blank" rel="noopener">深度解锁Webpack系列</a></li>
+<li><a href="https://segmentfault.com/a/1190000007892189" target="_blank" rel="noopener">关于 webpack 打包后文件过大的那些事</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/37429159" target="_blank" rel="noopener">前端性能优化-gzip压缩</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/31456808" target="_blank" rel="noopener">webpack配置中的hash值</a></li>
+<li><a href="https://juejin.im/post/5b304f1f51882574c72f19b0" target="_blank" rel="noopener">Webpack 4 配置最佳实践</a></li>
+</ul>
+<h3 id="Gulp"><a href="#Gulp" class="headerlink" title="Gulp"></a>Gulp</h3><ul>
 <li><a href="https://www.gulpjs.com.cn/docs/getting-started/quick-start/" target="_blank" rel="noopener">Gulp快速入门</a></li>
 </ul>
-<p><strong>Git</strong></p>
-<ul>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><ul>
 <li><a href="https://zhanglinlin.site/2019/06/14/git-summary/">Git常用命令总结</a></li>
 </ul>
 <hr>
-<h2 id="Frame"><a href="#Frame" class="headerlink" title="Frame"></a>Frame</h2><p><strong>Vue</strong></p>
-<ul>
+<h2 id="Frame-1"><a href="#Frame-1" class="headerlink" title="Frame"></a>Frame</h2><h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><ul>
 <li><a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="noopener">Vue教程</a></li>
+<li><a href="https://juejin.im/post/5e5c65426fb9a07cbc269c39" target="_blank" rel="noopener">vue考点总结</a></li>
+<li><a href="https://blog.csdn.net/saucxs/article/details/91967620" target="_blank" rel="noopener">Vuex设计思想</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/78981485" target="_blank" rel="noopener">Vuex从使用到原理解析</a></li>
+<li><a href="https://juejin.im/post/5db50eafe51d4529f66aa387" target="_blank" rel="noopener">vue-router从源码到实践到进阶</a></li>
+<li><a href="https://segmentfault.com/a/1190000015843132" target="_blank" rel="noopener">vue组件挂载到全局方法</a></li>
+<li><a href="https://cn.vuejs.org/v2/api/index.html#Vue-extend" target="_blank" rel="noopener">Vue.extend</a></li>
+<li><a href="https://cn.vuejs.org/v2/api/index.html#Vue-use" target="_blank" rel="noopener">Vue.use</a></li>
 </ul>
-<p><strong>React</strong></p>
-<ul>
+<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><ul>
 <li><a href="https://zh-hans.reactjs.org/docs/getting-started.html" target="_blank" rel="noopener">React文档</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/09/redux_tutorial_part_one_basic_usages.html" target="_blank" rel="noopener">Redux 入门教程</a></li>
+<li><a href="https://segmentfault.com/a/1190000015367584" target="_blank" rel="noopener">Redux设计思想与使用场景</a></li>
 </ul>
-<p><strong>Sass</strong></p>
-<ul>
+<h3 id="Vue和React"><a href="#Vue和React" class="headerlink" title="Vue和React"></a>Vue和React</h3><ul>
+<li><a href="https://juejin.im/post/5d6a6997e51d4561a54b69f6" target="_blank" rel="noopener">Redux和Vuex的对比</a></li>
+<li><a href="https://juejin.im/post/5cf09ebbf265da1bcb4f1234" target="_blank" rel="noopener">前端框架技术选型React vs. Vue</a></li>
+</ul>
+<h3 id="Sass"><a href="#Sass" class="headerlink" title="Sass"></a>Sass</h3><ul>
 <li><a href="https://www.sass.hk/docs/" target="_blank" rel="noopener">Sass中文文档</a></li>
 <li><a href="https://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="noopener">SASS用法指南</a></li>
 </ul>
-<p><strong>Less</strong></p>
-<ul>
+<h3 id="Less"><a href="#Less" class="headerlink" title="Less"></a>Less</h3><ul>
 <li><a href="https://less.bootcss.com/" target="_blank" rel="noopener">Less官方手册</a></li>
 </ul>
-<p><strong>小程序</strong></p>
-<ul>
+<h3 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h3><ul>
 <li><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/" target="_blank" rel="noopener">小程序开发指南</a></li>
 </ul>
-<p><strong>jQuery</strong></p>
-<ul>
+<h3 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h3><ul>
 <li><a href="https://www.jquery123.com/" target="_blank" rel="noopener">jQuery API中文文档</a></li>
 </ul>
-<p><strong>Bootstrap</strong></p>
-<ul>
+<h3 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h3><ul>
 <li><a href="https://v3.bootcss.com/components/#" target="_blank" rel="noopener">Bootstrap中文文档</a></li>
 </ul>
 <hr>
-<h2 id="Supplementary"><a href="#Supplementary" class="headerlink" title="Supplementary"></a>Supplementary</h2><p><strong>NodeJs</strong></p>
-<ul>
+<h2 id="Supplementary-1"><a href="#Supplementary-1" class="headerlink" title="Supplementary"></a>Supplementary</h2><h3 id="NodeJs"><a href="#NodeJs" class="headerlink" title="NodeJs"></a>NodeJs</h3><ul>
 <li><a href="http://nodejs.cn/api/" target="_blank" rel="noopener">Node.js文档</a></li>
 </ul>
-<p><strong>i18Next</strong></p>
-<ul>
+<h3 id="i18Next"><a href="#i18Next" class="headerlink" title="i18Next"></a>i18Next</h3><ul>
 <li><a href="https://www.i18next.com/overview/api" target="_blank" rel="noopener">i18next documentation</a></li>
 </ul>
-<p><strong>Echarts</strong></p>
-<ul>
+<h3 id="Echarts"><a href="#Echarts" class="headerlink" title="Echarts"></a>Echarts</h3><ul>
 <li><a href="https://www.echartsjs.com/zh/api.html#echarts" target="_blank" rel="noopener">Echarts API文档</a></li>
 </ul>
 <hr>
-<h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><p><strong>数组</strong></p>
-<pre><code>数组是顺序存储结构，拥有非常高效的随机访问能力；至于数组的劣势体现在插入和删除元素方面。
+<h2 id="Algorithms-1"><a href="#Algorithms-1" class="headerlink" title="Algorithms"></a>Algorithms</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><pre><code>数组是顺序存储结构，拥有非常高效的随机访问能力；至于数组的劣势体现在插入和删除元素方面。
 数组适合的是 读操作多、写操作少 的场景。
-</code></pre><p><strong>链表</strong></p>
-<pre><code>链表是一种在物理上非连续、非顺序的数据结构，由若干节点组成。
+</code></pre><h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><pre><code>链表是一种在物理上非连续、非顺序的数据结构，由若干节点组成。
 链表的优势在于灵活地进行插入和删除操作。
 </code></pre><p>数组和链表是物理结构上的存储结构。与之相对的，则是数据存储的<strong>逻辑结构</strong>。</p>
 <pre><code>线性逻辑结构：顺序表、栈、队列
 
 非线性逻辑结构：树、图
-</code></pre><p><strong>栈</strong></p>
-<pre><code>栈中的元素只能先进后出。最早进入到元素存放的位置称为栈底，最后进入的元素位置称为栈顶。
+</code></pre><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><pre><code>栈中的元素只能先进后出。最早进入到元素存放的位置称为栈底，最后进入的元素位置称为栈顶。
 栈既可以用数组实现，也可以用链表实现。
-</code></pre><p><strong>队列</strong></p>
-<pre><code>队列中的元素只能先进先出。最早进入到元素存放的位置称为队头，最后进入的元素位置称为队尾。
+</code></pre><h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><pre><code>队列中的元素只能先进先出。最早进入到元素存放的位置称为队头，最后进入的元素位置称为队尾。
 为方便入队操作，把队尾位置规定为最后入队元素的下一个位置。
 用数组实现的队列可以采用循环队列的方式维持队列容量的恒定。
 一直到 (队尾下标 + 1) % 队列长度 == 队头下标 时，代表队列已满。
-</code></pre><p><strong>散列表</strong></p>
-<pre><code>散列表也叫哈希表，这种数据结构提供了键(Key)和值(Value)的映射关系。
+</code></pre><h3 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h3><pre><code>散列表也叫哈希表，这种数据结构提供了键(Key)和值(Value)的映射关系。
 通过哈希函数将key转为下标存放value到数组中，实现读取操作的时间复杂度为O(1)。
 解决哈希冲突的方法主要有两种：开放寻址和链表法。
 开放寻址法，即当前对应的数组下标被占用时，寻找下一个空位。
@@ -742,12 +787,10 @@ recurse(5); // 8
 散列表扩容：
 1、扩容，变为原来数组长度的两倍。
 2、重新计算hash。因为长度扩大后，hash规则也发生了改版。
-</code></pre><p><strong>树</strong></p>
-<pre><code>树是n(n &gt;= 0)个节点的有限集合。当n = 0时，称为空树。在任意一个非空树种，有如下特点：
+</code></pre><h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><pre><code>树是n(n &gt;= 0)个节点的有限集合。当n = 0时，称为空树。在任意一个非空树种，有如下特点：
 1、有且仅有一个特定的称为根的节点。
 2、当n&gt;1时，其余节点可分为m(m&gt;0)个互不相交的有限集，每一个集合本身又是一个树，称为根的子树。
-</code></pre><p><strong>二叉树</strong></p>
-<pre><code>// 二叉树
+</code></pre><h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><pre><code>// 二叉树
 二叉树是树的一种特殊形式。这种书的每个节点最多有2个节点。
 二叉树节点的两个孩子节点，被称为左孩子和右孩子。孩子节点的顺序是固定的，不能混淆颠倒。
 
@@ -757,8 +800,7 @@ recurse(5); // 8
 // 完全二叉树
 对一个有n个节点的二叉树，按层级顺序编号，则所有节点的编号为1到n；
 如果这个树所有节点和同样深度的满二叉树的编号从1到n的节点位置相同，则成为完全二叉树。
-</code></pre><p><strong>二叉查找树</strong></p>
-<ol>
+</code></pre><h3 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h3><ol>
 <li>如果左子树不为空，则左子树上所有节点的值均小于根节点的值</li>
 <li>如果右子树不为空，则右子树上所有节点的值均大于根节点的值</li>
 <li>左、右子树也都是二叉查找树</li>
@@ -848,8 +890,7 @@ bt.prevOrder(bt.root); // 3 2 9 10 8 4
 bt.inOrder(bt.root); // 9 2 10 3 8 4
 bt.postOrder(bt.root); // 9 10 2 4 8 3
 bt.levelOrder(); // 3 2 8 9 10 4
-</code></pre><p><strong>二分查找</strong></p>
-<pre><code>function binarySearch(arr, target) {
+</code></pre><h3 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h3><pre><code>function binarySearch(arr, target) {
     var start = 0,
         end = arr.length - 1;
 
@@ -871,8 +912,7 @@ bt.levelOrder(); // 3 2 8 9 10 4
 
 var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 binarySearch(arr, 4); // 3
-</code></pre><p><strong>冒泡排序</strong></p>
-<pre><code>function bubbleSort(arr) {
+</code></pre><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><pre><code>function bubbleSort(arr) {
     for(let i = 0; i &lt; arr.length - 1; i ++) {
         for(let j = 0; j &lt; arr.length - i - 1; j++) {
             if(arr[j] &gt; arr[j + 1]) {
@@ -887,8 +927,7 @@ binarySearch(arr, 4); // 3
 var arr = [5, 8, 9, 3, 6, 4, 2, 1, 7];
 bubbleSort(arr);
 console.log(arr); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
-</code></pre><p><strong>快速排序</strong></p>
-<pre><code>function quickSort(arr, start, end) {
+</code></pre><h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><pre><code>function quickSort(arr, start, end) {
     if(start &gt;= end) return;
     // 得到基准元素的位置
     var pivot = partition(arr, start, end);
@@ -939,13 +978,9 @@ console.log(arr); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
     <!-- Pre or Next -->
     <div class="nav-links">
       
-        <div class="nav-previous">
-          <a href="/2020/02/29/python-spider/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
-        </div>
-      
       
         <div class="nav-next">
-          <a href="/2020/02/22/2020-read-list/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+          <a href="/2020/02/21/python-spider/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
         </div>
       
     </div>

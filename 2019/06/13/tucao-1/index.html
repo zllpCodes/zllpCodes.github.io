@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Zhang Linlin">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="工作中遇到的奇怪bug😂不吐不快(1)">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="用于存放技术学习的总结、阅读后的感想以及生活中的点滴">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="张琳琳个人网站">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>工作中遇到的奇怪bug😂不吐不快(1) - 张琳琳个人网站</title>
+
+
+  <link rel="shortcut icon" href="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/favicon.ico">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://zhanglinlin-site-1258125238.cos.ap-beijing.myqcloud.com/logo.png" alt="张琳琳个人网站" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  Home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  Archive
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  About
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            工作中遇到的奇怪bug😂不吐不快(1)
+            
+          </h1>
+          <p class="posted-on">
+            
+                2019-06-13
+            
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/技术/" rel="tag">
+                  技术
+                </a>
+              
+                <a href="/tags/吐槽/" rel="tag">
+                  吐槽
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h3 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h3><p>工作嘛，总有一堆烦心事；每天就是努力扮演一个情绪稳定的成年人。<br>然后在遇到奇奇怪怪的bug之后，总能一秒破功，让人抓狂，尤其是当bug实在是太智障的时候，让人不禁想问一句：“这尼玛都什么沙雕玩意儿？！”</p>
+<p><strong>⚠️在此绝不diss任何码农、攻城狮、程序猿。生活不易，头顶易秃，和气生财。</strong></p>
+<h1 id="使用webpack-api-mocker掉坑记"><a href="#使用webpack-api-mocker掉坑记" class="headerlink" title="使用webpack-api-mocker掉坑记"></a>使用webpack-api-mocker掉坑记</h1><p>为了配置新项目的本地mock数据，之前的方式只能接收GET请求，不支持POST。但现在有POST的接口，那当然得适时的update一下配置。在网上搜到了 <code>webpack-api-mocker</code>，看了<a href="https://www.npmjs.com/package/webpack-api-mocker" target="_blank" rel="noopener">参考文档</a>，感觉很不错，符合我的需求；在现有的webpack基础上新增配置简单，改动原有配置小，嗯，就是它了！kuakuakua，一通操作，运行起来，结果报错了。行吧，咱也不敢说啥，还能怎么样呢，生活天天对我这只小猫咪下手，debug呗。</p>
+<p>吸取了之前的经验，我现在要认真的看看报错。</p>
+<pre><code>...
+Module build failed:
+  Error:
+    You gave us a visitor for the node type &quot;ReferencedIdentifier&quot;
+    but it&apos;s not a valid type
+...
+</code></pre><p>然后使用面向谷歌编程技能，搜出来这都是啥？没一个对得上的好吗？Exm？</p>
+<p>不行，我是成年人了。我要冷静。我要冷静。我要冷静。</p>
+<p>10min后。</p>
+<p>喝着巧克力牛奶。啊，快乐果然是甜食给的。我又可以愉快的debug了。</p>
+<p>既然报错没能够给值得参考的信息，那就只能认真研究文档了。</p>
+<p>经过我的不断比对后，我发现：嗯？这个文件的路径好像不是很一样，但是这个应该没有关系吧？要不还是按照文档配置一下路径吧，万一呢？</p>
+<p>然后我就尝试性的更改了文件路径，然后，就顺利运行了。Exm？？？</p>
+<p>再然后我又买了一杯柠檬茶。啊，我爱甜食。</p>
+<hr>
+<p>之前把文件放在根目录下，而不是新建了一个mocker文件夹放在里面。因为没有去看源码，所以其实根本没资格说沙雕。在此只是完全个人向的吐槽。</p>
+<p>最后要谢谢各位维护代码的大佬们，因为有你们的付出才能让吾等小白更愉快的写代码。❤️ 爱你萌</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/06/14/git-summary/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Newer Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2019/06/12/print-summary/" rel="prev">Older Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer class="site-info">
+  <div class="row inside-wrapper">
+    <div class="col-1">
+      <aside>
+        <div class="widget-text">
+          
+          
+          <a href="https://github.com/zllpCodes" class="icon icon-github" target="_blank">
+            github</a>
+          
+          <a href="mailto: zllmypem@163.com" class="icon icon-mail" target="_blank">
+            mail</a>
+          
+          
+        </div>
+      </aside>
+    </div>
+  </div>
+  <p>
+    <span>
+      张琳琳个人网站 &copy;
+      2020</span>
+    
+    <span class="split">|</span>
+    <span>
+      Powered by <a href="https://zhanglinlin.site" target="_blank">Zhang Linlin</a></span>
+    
+  </p>
+</footer>
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+
+</html>
